@@ -1,0 +1,172 @@
+{
+  "m_Shader": {
+    "m_FileID": 0,
+    "m_PathID": 8257146070679511791,
+    "Name": "NK/Unlit/Field/NK_Field_SDToon",
+    "IsNull": false
+  },
+  "m_SavedProperties": {
+    "m_TexEnvs": {
+      "_MainTex": {
+        "m_Texture": {
+          "m_FileID": 0,
+          "m_PathID": -2605787245965328730,
+          "Name": "c191_01",
+          "IsNull": false
+        },
+        "m_Scale": {
+          "X": 1.0,
+          "Y": 1.0
+        },
+        "m_Offset": {
+          "X": 0.0,
+          "Y": 0.0
+        }
+      },
+      "_RimTex": {
+        "m_Texture": {
+          "m_FileID": 0,
+          "m_PathID": -4671568471580177963,
+          "Name": "SDToon_Tex_RimDefault_25",
+          "IsNull": false
+        },
+        "m_Scale": {
+          "X": 1.0,
+          "Y": 1.0
+        },
+        "m_Offset": {
+          "X": 0.0,
+          "Y": 0.0
+        }
+      }
+    },
+    "m_Ints": {},
+    "m_Floats": {
+      "Vector1_5d7fc0aaedf34ecdbc9d1bc875146ebe": 1.0,
+      "Vector1_698d650098694a9fa35b4c2c8abeaf82": 0.387,
+      "Vector1_7d2d25dbf26c4686a7e1c7060d7f13c5": 0.506,
+      "Vector1_9bb0a7b48c8549e99317b6e81deee7f8": 0.293,
+      "_Alpha": 1.0,
+      "_AlphaClip": 0.0,
+      "_Blend": 0.0,
+      "_BumpScale": 1.0,
+      "_ClearCoatMask": 0.0,
+      "_ClearCoatSmoothness": 0.0,
+      "_Cull": 2.0,
+      "_Cutoff": 0.5,
+      "_DarkenPower": 0.0,
+      "_DetailAlbedoMapScale": 1.0,
+      "_DetailNormalMapScale": 1.0,
+      "_DstBlend": 0.0,
+      "_EnvironmentReflections": 1.0,
+      "_GlossMapScale": 0.0,
+      "_Glossiness": 0.0,
+      "_GlossyReflections": 0.0,
+      "_LightIntensity": 0.15,
+      "_LightPower": 0.0,
+      "_Metallic": 0.0,
+      "_OcclusionStrength": 1.0,
+      "_Parallax": 0.005,
+      "_QueueOffset": 0.0,
+      "_RampPower": 0.25,
+      "_ReceiveShadows": 1.0,
+      "_RimPower": 1.2,
+      "_RimRange": 4.0,
+      "_Smoothness": 0.5,
+      "_SmoothnessTextureChannel": 0.0,
+      "_SpecularHighlights": 1.0,
+      "_SrcBlend": 1.0,
+      "_Surface": 0.0,
+      "_WorkflowMode": 1.0,
+      "_ZWrite": 1.0
+    },
+    "m_Colors": {
+      "Color_d4c2de030df44ee98316c0fc606c977c": {
+        "r": 0.6833069,
+        "g": 0.78431374,
+        "b": 0.12941174,
+        "a": 0.0
+      },
+      "Vector3_555963a5c5c84cef9aa58fe788e175f2": {
+        "r": -0.12,
+        "g": -0.6,
+        "b": -0.96,
+        "a": 0.0
+      },
+      "Vector3_8dfef5d7c0da4765b32d12411ccd2642": {
+        "r": -1.0,
+        "g": 1.0,
+        "b": 0.0,
+        "a": 0.0
+      },
+      "_BaseColor": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 1.0
+      },
+      "_Color": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 1.0
+      },
+      "_DarkenColor": {
+        "r": 0.25511748,
+        "g": 0.3679245,
+        "b": 0.28331923,
+        "a": 0.0
+      },
+      "_EmissionColor": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 1.0
+      },
+      "_LightColor": {
+        "r": 0.7830189,
+        "g": 0.35139182,
+        "b": 0.2474635,
+        "a": 0.0
+      },
+      "_LightDir": {
+        "r": 0.8,
+        "g": 5.0,
+        "b": -10.0,
+        "a": 0.0
+      },
+      "_LightRange": {
+        "r": 0.41,
+        "g": 2.91,
+        "b": 0.81,
+        "a": -1.76
+      },
+      "_RampColor": {
+        "r": 0.9339623,
+        "g": 0.31730437,
+        "b": 0.2599235,
+        "a": 0.0
+      },
+      "_RampDir": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 0.0
+      },
+      "_RimDir": {
+        "r": 0.5,
+        "g": -2.0,
+        "b": 1.0,
+        "a": 0.0
+      },
+      "_SpecColor": {
+        "r": 0.2,
+        "g": 0.2,
+        "b": 0.2,
+        "a": 1.0
+      }
+    }
+  },
+  "m_Name": "c191_01",
+  "Name": "c191_01"
+}
