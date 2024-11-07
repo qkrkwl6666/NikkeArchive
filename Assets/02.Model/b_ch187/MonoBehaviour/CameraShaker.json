@@ -1,0 +1,63 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": -269322721958999528
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": 9019975465160788173
+  },
+  "m_Name": "",
+  "target": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "startDelay": 0.1,
+  "duration": 1.0,
+  "intensity": {
+    "x": 0.015,
+    "y": 0.015,
+    "z": 0.015
+  },
+  "yawPitchRoll": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "curve": {
+    "m_Curve": [
+      {
+        "time": 0.0,
+        "value": 1.0,
+        "inSlope": 0.0,
+        "outSlope": 0.0,
+        "weightedMode": 0,
+        "inWeight": 0.33333334,
+        "outWeight": 0.33333334
+      },
+      {
+        "time": 0.39940053,
+        "value": 0.0,
+        "inSlope": 0.0040731337,
+        "outSlope": 0.0040731337,
+        "weightedMode": 0,
+        "inWeight": 0.33333334,
+        "outWeight": 0.67771214
+      },
+      {
+        "time": 0.7124939,
+        "value": 0.0,
+        "inSlope": 0.0,
+        "outSlope": 0.0,
+        "weightedMode": 0,
+        "inWeight": 0.52596045,
+        "outWeight": 0.0
+      }
+    ],
+    "m_PreInfinity": 2,
+    "m_PostInfinity": 2,
+    "m_RotationOrder": 4
+  },
+  "loop": 0
+}

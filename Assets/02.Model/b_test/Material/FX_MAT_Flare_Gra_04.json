@@ -1,0 +1,103 @@
+{
+  "m_Shader": {
+    "m_FileID": 1,
+    "m_PathID": -4634704596819488118,
+    "Name": "",
+    "IsNull": false
+  },
+  "m_SavedProperties": {
+    "m_TexEnvs": {
+      "_Texture": {
+        "m_Texture": {
+          "m_FileID": 2,
+          "m_PathID": -7587001251183268526,
+          "Name": "",
+          "IsNull": false
+        },
+        "m_Scale": {
+          "X": 1.0,
+          "Y": 1.0
+        },
+        "m_Offset": {
+          "X": 0.0,
+          "Y": 0.0
+        }
+      }
+    },
+    "m_Ints": {},
+    "m_Floats": {
+      "_BumpScale": 1.0,
+      "_Cull_Mode": 0.0,
+      "_Custom_Data_Distort_Power_Use": 0.0,
+      "_Custom_Data_MainMask_Offset_Use": 1.0,
+      "_Custom_Data_Offset_Use": 0.0,
+      "_Cutoff": 0.5,
+      "_DetailNormalMapScale": 1.0,
+      "_Dis_Speed_X": 0.0,
+      "_Dis_Speed_Y": -0.36,
+      "_Distortion_Power_X": -0.56,
+      "_Distortion_Power_Y": 0.18,
+      "_DstBlend": 0.0,
+      "_GlossMapScale": 1.0,
+      "_Glossiness": 1.0,
+      "_GlossyReflections": 1.0,
+      "_InvFade": 1.0,
+      "_Main_Distortion_Use": 1.0,
+      "_Main_Speed_X": 0.0,
+      "_Main_Speed_Y": 0.0,
+      "_Main_Texture_No": 1.0,
+      "_Mask_Distortion_Use": 0.0,
+      "_Mask_Speed_X": 0.0,
+      "_Mask_Speed_Y": 0.0,
+      "_Metallic": 1.0,
+      "_Mode": 1.0,
+      "_Multiply": 1.0,
+      "_OcclusionStrength": 1.0,
+      "_Parallax": 0.02,
+      "_RGBRGBA": 0.0,
+      "_Refraction": 0.5,
+      "_RimIntensity": 1.0,
+      "_RimRange": 0.5,
+      "_SmoothnessTextureChannel": 0.0,
+      "_SpecIntensity": 0.8887804,
+      "_Specular": 5.0,
+      "_SpecularHighlights": 1.0,
+      "_SrcBlend": 1.0,
+      "_UVSec": 0.0,
+      "_UseBump": 0.0,
+      "_ZOffsetFactor": 0.0,
+      "_ZOffsetUnits": 0.0,
+      "_ZTest_Mode": 4.0,
+      "_ZWrite": 1.0,
+      "_ZWrite_Mode": 0.0
+    },
+    "m_Colors": {
+      "_Color": {
+        "r": 5.992157,
+        "g": 5.992157,
+        "b": 5.992157,
+        "a": 1.0
+      },
+      "_EmissionColor": {
+        "r": 0.0,
+        "g": 0.17241383,
+        "b": 1.0,
+        "a": 1.0
+      },
+      "_RimColor": {
+        "r": 0.1397059,
+        "g": 0.6796143,
+        "b": 1.0,
+        "a": 1.0
+      },
+      "_TintColor": {
+        "r": 2.456,
+        "g": 0.965462,
+        "b": 0.0,
+        "a": 0.997
+      }
+    }
+  },
+  "m_Name": "FX_MAT_Flare_Gra_04",
+  "Name": "FX_MAT_Flare_Gra_04"
+}
