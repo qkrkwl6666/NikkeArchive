@@ -5,12 +5,18 @@ using UnityEngine;
 public class NikkeStats
 {
     public int Hp {  get; private set; } // 체력
+    public int MaxHp {  get; private set; } // 최대 체력
     public int Defence { get; private set; } // 방어력
     public int Attack { get; private set; } // 공격력
     public BustType BustType { get; set; } // 버스트 
     public CodeChip Category { get; set; } // 속성
     public Weapon Weapon { get; set; } // 무기
 
+    // 상세 스텟
+    public float AttackTime {  get; private set; } // 한발 쏘는 시간 애니메이션 연동
+    public float ReloadTime { get; private set; } // 재장전 시간 애니메이션 연동
+    public float MoveSpeed { get; private set; }
+    public int MaxAmmo { get; private set; } // 최대 탄약
 }
 
 public enum BustType

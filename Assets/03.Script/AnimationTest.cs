@@ -8,8 +8,8 @@ public class AnimationTest : MonoBehaviour
     private RuntimeAnimatorController runtimeAnimator;
     private List<AnimationClip> animatorClips = new ();
 
-    private float duration = 3f;
-    private float time = 10.0f;
+    private float duration = 5f;
+    private float time = 5f;
     private int index = 0;
 
     public void Start()

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: C_MariFormationAnimationOverride
+  m_Controller: {fileID: 9100000, guid: 13d2a3d2b8400b146b028d1ff8f32456, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: dc63ff07d388f324cb590da4bcefcc2d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ace6aa87151079f4686c63098bcc4b91, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 69b9b074e8170804e8b899d5789ef429, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a4f7150c57c9b404cbe8434a7dddf97f, type: 2}
