@@ -15,6 +15,7 @@ public class NikkeAI : MonoBehaviour
     private float attackCooldown = 2f;
     private float attackSpeed = 1f; // 공격 속도
     private int maxAmmo = 10;
+    private float rotationSpeed = 1f; // 회전 속도
 
     private GameObject targetEnemy = null;
 
@@ -65,6 +66,11 @@ public class NikkeAI : MonoBehaviour
 
     private void Awake()
     {
+        
+    }
+
+    private void Start()
+    {
         animator = GetComponent<Animator>();
     }
 
@@ -112,6 +118,21 @@ public class NikkeAI : MonoBehaviour
         if (targetEnemy == null) return IBTNode.BTNodeState.Failure;
 
         return IBTNode.BTNodeState.Success;
+    }
+
+    private void Attack()
+    {
+        if(targetEnemy == null) return;
+
+        // 적 방향으로 회전
+        Vector3 enemyDir = (targetEnemy.transform.position - transform.position);
+        enemyDir.y = 0;
+        enemyDir.Normalize();
+
+        transform.rotation = 
+            Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(enemyDir), rotationSpeed * Time.deltaTime);
+
+
     }
 
     private bool IsAnimationRunning(string animationName)
