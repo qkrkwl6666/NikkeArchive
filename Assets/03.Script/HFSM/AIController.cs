@@ -1,8 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
-public abstract class AIController
+public abstract class AIController : MonoBehaviour
 {
-    public Animator animator;
+    protected Animator animator;
+    public Animation_State CurrentAnimationState {  get; set; }
+
+    private Dictionary<(string, Animation_State), string> animationCache = new ();
+
+    public Creature TargetEnemy { get; private set; }
+
+    public NikkeStats NikkeStats { get; private set; }
+    public LinkedList<Creature> enemies = new ();
+
+    public float AttackRange { get; set; } = 10f;
+
+    protected virtual void Start()
+    {
+        animator = GetComponent<Animator>();
+
+        Debug.Log($"AIController Start");
+    }
+
+    public void AnimationPlay(string name)
+    {
+        if (AnimationStringException(name))
+        {
+            animator.Play(name);
+            return;
+        }
+
+        if (!animationCache.TryGetValue((name, CurrentAnimationState), out string fullName))
+        {
+            fullName = $"{name}_{GetAnimationStateString()}";
+            animationCache.Add((name, CurrentAnimationState), fullName);
+        }
+
+        animator.Play(fullName);
+    }
+
+    private bool AnimationStringException(string name)
+    {
+        if (name == AnimationStrings.MOVE_ING || name == AnimationStrings.MOVE_JUMP) return true;
+
+        return false;
+    }
+
+
+    private string GetAnimationStateString()
+    {
+        switch (CurrentAnimationState)
+        {
+            case Animation_State.NORMAL:
+                return "Normal";
+            case Animation_State.STAND:
+                return "Stand";
+            case Animation_State.KNEEL:
+                return "Kneel";
+            default:
+                return string.Empty;
+        }
+    }
+
+    public bool EnemyDetection()
+    {
+        TargetEnemy = null;
+
+        float frevDistance = float.MaxValue;
+
+        foreach (var enemy in enemies)
+        {
+            float distance = Vector3.Distance(enemy.transform.position, transform.position);
+
+            if (distance <= NikkeStats.AttackRange && distance < frevDistance)
+            {
+                frevDistance = distance;
+                TargetEnemy = enemy;
+            }
+        }
+
+        if (TargetEnemy == null) return false;
+
+        return true;
+    }
+
+
+}
+
+public enum Animation_State
+{
+    NORMAL,
+    STAND,
+    KNEEL,
 }

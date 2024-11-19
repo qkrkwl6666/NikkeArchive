@@ -69,7 +69,7 @@ public class NikkeAIBTVersion : MonoBehaviour
         {
             float distance = Vector3.Distance(enemy.transform.position, transform.position);
 
-            if (distance <= attackCooldown && distance < frevDistance)
+            if (distance <= attackRange && distance < frevDistance)
             {
                 frevDistance = distance;
                 targetEnemy = enemy;
@@ -104,11 +104,4 @@ public class NikkeAIBTVersion : MonoBehaviour
         
         return false;
     }
-}
-
-public enum Animation_State
-{
-    NORMAL,
-    STAND,
-    KNEEL,
 }

@@ -39,4 +39,10 @@ public static class AnimationStrings
     public static readonly string ATTACK_DELAY_KNEEL = "Attack_Delay_Kneel";
     public static readonly string Attack_RELOAD_KNEEL = "Attack_Reload_Kneel";
 
+    // ATTACK
+    public static readonly string ATTACK_START = "Attack_Start";
+    public static readonly string ATTACK_ING = "Attack_Ing";
+    public static readonly string ATTACK_END = "Attack_End";
+    public static readonly string ATTACK_DELAY = "Attack_Delay";
+    public static readonly string Attack_RELOAD = "Attack_Reload";
 }

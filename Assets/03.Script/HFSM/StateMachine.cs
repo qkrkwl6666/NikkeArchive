@@ -24,5 +24,6 @@ public class StateMachine
     {
         if (CurrentState == null) return;
 
+        CurrentState.Execute();
     }
 }

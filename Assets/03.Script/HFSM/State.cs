@@ -5,10 +5,12 @@ using UnityEngine;
 public abstract class State : IState
 {
     protected StateMachine stateMachine;
+    protected AIController controller;
 
-    protected State(StateMachine stateMachine)
+    protected State(StateMachine stateMachine, AIController aIController)
     { 
         this.stateMachine = stateMachine; 
+        this.controller = aIController;
     }
 
     public virtual void Enter() { }
