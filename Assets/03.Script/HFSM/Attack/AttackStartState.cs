@@ -6,7 +6,8 @@ public class AttackStartState : State
 {
     private AttackIngState attackIngState;
 
-    public AttackStartState(StateMachine stateMachine, AttackIngState attackIngState, AIController aIController) 
+    public AttackStartState(StateMachine stateMachine, AIController aIController, 
+        AttackIngState attackIngState) 
         : base(stateMachine, aIController)
     {
         this.attackIngState = attackIngState;
@@ -26,14 +27,17 @@ public class AttackStartState : State
     {
         if (controller == null) return;
 
-        if (controller.TargetEnemy == null)
-        {
-            controller.EnemyDetection();
-        }
+
     }
 
     public void AnimationEventAttackStartEnd()
     {
+        // enemy null
+        if (controller.TargetEnemy == null || !controller.EnemyDetection())
+        {
+            // Todo : Delay 상태 이동
+            return;
+        }
         stateMachine.ChangeState(attackIngState);
     }
 

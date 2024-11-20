@@ -86,7 +86,20 @@ public abstract class AIController : MonoBehaviour
         return true;
     }
 
+    public void RotateEnemy()
+    {
+        if (TargetEnemy == null) return;
 
+        // 적 방향으로 회전
+        Vector3 enemyDir = (TargetEnemy.transform.position - transform.position);
+        enemyDir.y = 0;
+        enemyDir.Normalize();
+
+        transform.rotation =
+            Quaternion.Slerp(transform.rotation,
+            Quaternion.LookRotation(enemyDir), NikkeStats.RotateSpeed
+            * Time.deltaTime);
+    }
 }
 
 public enum Animation_State

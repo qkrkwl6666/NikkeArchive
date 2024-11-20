@@ -14,6 +14,7 @@ public class NikkeStats
 
     // 상세 스텟
     public float AttackSpeed { get; private set; } = 1.0f; // 총알 애니메이션 연동 배속
+    public float RotateSpeed { get; private set; } = 1.0f;
     public float DelayTime {  get; private set; } // shot 후 다음 shot 대기 시간
     public float ReloadTime { get; private set; } // 재장전 시간 애니메이션 연동
     public float MoveSpeed { get; private set; } // 이동 속도

@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class AttackIngState : State
 {
-    public AttackIngState(StateMachine stateMachine, AIController aIController) : base(stateMachine, aIController)
-    {
+    private AttackDelayState attackDelayState;
 
+    public AttackIngState(StateMachine stateMachine, AIController aIController
+        , AttackDelayState attackDelayState, AttackEndState attackEndState) 
+        : base(stateMachine, aIController)
+    {
+        this.attackDelayState = attackDelayState;   
     }
 
     public override void Enter()
     {
-        
+        controller.AnimationPlay(AnimationStrings.ATTACK_DELAY);
+
+
     }
 
     public override void Exit()
@@ -23,6 +29,16 @@ public class AttackIngState : State
     {
         if (controller == null) return;
 
+        if(controller.TargetEnemy == null || controller.EnemyDetection())
+        {
+            stateMachine.ChangeState(attackDelayState);
+        }
 
+        controller.RotateEnemy();
+    }
+
+    public void AnimationEventAttackIngEnd()
+    {
+        stateMachine.ChangeState(attackDelayState);
     }
 }
