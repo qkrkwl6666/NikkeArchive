@@ -15,7 +15,7 @@ public class AttackIngState : State
 
     public override void Enter()
     {
-        controller.AnimationPlay(AnimationStrings.ATTACK_DELAY);
+        controller.AnimationPlay(AnimationStrings.ATTACK_ING);
 
 
     }
@@ -29,7 +29,7 @@ public class AttackIngState : State
     {
         if (controller == null) return;
 
-        if(controller.TargetEnemy == null || controller.EnemyDetection())
+        if(controller.TargetEnemy == null)
         {
             stateMachine.ChangeState(attackDelayState);
         }

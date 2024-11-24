@@ -7,7 +7,10 @@ public class AttackState : State
 {
     public StateMachine SubStateMachine { get; private set; }
 
-    private AttackStartState attackStartState;
+    private AttackStartState startState;
+    private AttackIngState ingState;
+    private AttackDelayState delayState;
+    private AttackEndState endState;
 
     public Attack_State CurrentAttackState { get; set; }
 
@@ -15,11 +18,15 @@ public class AttackState : State
         : base(stateMachine, controller)
     {
         SubStateMachine = subStateMachine;
+
+        startState = new AttackStartState(SubStateMachine, controller, ingState);
     }
 
     public override void Enter()
     {
         CurrentAttackState = Attack_State.ATTACK_START;
+
+        SubStateMachine.Initialize(startState);
     }
 
     public override void Exit() 
@@ -30,24 +37,12 @@ public class AttackState : State
     {
         if (controller == null) return;
 
-        //if(controller.TargetEnemy == null)
-        //{
-        //    switch(CurrentAttackState)
-        //    {
-        //        case Attack_State.ATTACK_START:
-
-        //            break;
-        //        case Attack_State.ATTACK_ING:
-
-        //            break;
-        //        case Attack_State.ATTACK_DELAY:
-
-        //            break;
-        //        case Attack_State.ATTACK_END:
-
-        //            break;
-        //    }
-        //}
+        if(controller.TargetEnemy != null)
+        {
+            controller.RotateEnemy();
+        }
+        
+        SubStateMachine.Update();
     }
 }
 
