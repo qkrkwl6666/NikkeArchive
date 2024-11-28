@@ -5,19 +5,23 @@ using UnityEngine;
 public class AttackIngState : State
 {
     private AttackDelayState attackDelayState;
+    private AttackEndState attackEndState;
 
-    public AttackIngState(StateMachine stateMachine, AIController aIController
-        , AttackDelayState attackDelayState, AttackEndState attackEndState) 
+    public AttackIngState(StateMachine stateMachine, AIController aIController) 
         : base(stateMachine, aIController)
     {
-        this.attackDelayState = attackDelayState;   
+        
+    }
+
+    public void StateInit(AttackDelayState attackDelayState, AttackEndState attackEndState)
+    {
+        this.attackDelayState = attackDelayState;
+        this.attackEndState = attackEndState;
     }
 
     public override void Enter()
     {
         controller.AnimationPlay(AnimationStrings.ATTACK_ING);
-
-
     }
 
     public override void Exit()
@@ -34,7 +38,6 @@ public class AttackIngState : State
             stateMachine.ChangeState(attackDelayState);
         }
 
-        controller.RotateEnemy();
     }
 
     public void AnimationEventAttackIngEnd()

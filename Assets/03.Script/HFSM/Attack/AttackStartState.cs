@@ -5,12 +5,18 @@ using UnityEngine;
 public class AttackStartState : State
 {
     private AttackIngState attackIngState;
+    private AttackDelayState attackdelayState;
 
-    public AttackStartState(StateMachine stateMachine, AIController aIController, 
-        AttackIngState attackIngState) 
+    public AttackStartState(StateMachine stateMachine, AIController aIController) 
         : base(stateMachine, aIController)
     {
+
+    }
+
+    public void StateInit(AttackIngState attackIngState, AttackDelayState attackdelayState)
+    {
         this.attackIngState = attackIngState;
+        this.attackdelayState = attackdelayState;
     }
 
     public override void Enter()
@@ -36,6 +42,7 @@ public class AttackStartState : State
         if (controller.TargetEnemy == null || !controller.EnemyDetection())
         {
             // Todo : Delay 상태 이동
+            stateMachine.ChangeState(attackdelayState);
             return;
         }
         stateMachine.ChangeState(attackIngState);

@@ -9,7 +9,6 @@ public abstract class AIController : MonoBehaviour
     public Animation_State CurrentAnimationState {  get; set; }
 
     private Dictionary<(string, Animation_State), string> animationCache = new ();
-
     public Creature TargetEnemy { get; private set; }
 
     public NikkeStats NikkeStats { get; private set; }
@@ -20,8 +19,6 @@ public abstract class AIController : MonoBehaviour
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
-
-        Debug.Log($"AIController Start");
     }
 
     public void AnimationPlay(string name)
@@ -99,6 +96,24 @@ public abstract class AIController : MonoBehaviour
             Quaternion.Slerp(transform.rotation,
             Quaternion.LookRotation(enemyDir), NikkeStats.RotateSpeed
             * Time.deltaTime);
+    }
+
+    public void RotateFornt()
+    {
+        // 정면으로 회전
+        Vector3 forntDir = Vector3.right;
+
+        forntDir.Normalize();
+
+        transform.rotation =
+            Quaternion.Slerp(transform.rotation,
+            Quaternion.LookRotation(forntDir), NikkeStats.RotateSpeed
+            * Time.deltaTime);
+    }
+
+    public virtual void MoveFront() 
+    {
+
     }
 }
 
