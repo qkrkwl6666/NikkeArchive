@@ -14,13 +14,13 @@ public class NikkeStats
 
     // 상세 스텟
     public float AttackSpeed { get; private set; } = 1.0f; // 총알 애니메이션 연동 배속
-    public float RotateSpeed { get; private set; } = 0.4f;
-    public float DelayTime {  get; private set; } // shot 후 다음 shot 대기 시간
-    public float ReloadTime { get; private set; } // 재장전 시간 애니메이션 연동
-    public float MoveSpeed { get; private set; } // 이동 속도
+    public float RotateSpeed { get; private set; } = 10f;
+    public float DelayTime { get; private set; } = 0.2f;// shot 후 다음 shot 대기 시간
+    public float ReloadTime { get; private set; } = 0.3f;// 재장전 시간 애니메이션 연동
+    public float MoveSpeed { get; private set; } = 4f;// 이동 속도
     public int MaxAmmo { get; private set; } // 최대 탄약
     public int CurrentAmmo { get; private set; } // 현재 탄약
-    public float AttackRange { get; private set; } // 공격 사거리
+    public float AttackRange { get; private set; } = 8f;// 공격 사거리
     public int AttackCount { get; private set; } // 공격 횟수
 }
 

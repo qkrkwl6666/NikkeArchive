@@ -11,19 +11,19 @@ public class StateMachine
     public void Initialize(State state)
     {
         CurrentState = state;
-        CurrentState.Enter();
+        CurrentState?.Enter();
     }
     public void ChangeState(State state) 
     {
-        CurrentState.Exit();
+        CurrentState?.Exit();
         CurrentState = state;
-        CurrentState.Enter();
+        CurrentState?.Enter();
     }
 
     public void Update()
     {
         if (CurrentState == null) return;
 
-        CurrentState.Execute();
+        CurrentState?.Execute();
     }
 }

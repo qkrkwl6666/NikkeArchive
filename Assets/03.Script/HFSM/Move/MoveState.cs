@@ -6,43 +6,49 @@ public class MoveState : State
 {
     public StateMachine SubStateMachine { get; private set; }
 
+    // Move State
+    private MoveFrontState moveFrontState;
+
+    // Attack State
     private AttackState attackState;
 
-    private float time = 0f;
-    private float enemyDetectTime = 0.1f;
-
-    public MoveState(StateMachine stateMachine, StateMachine subStateMachine, AIController aIController,
-        AttackState attackState) : base(stateMachine, aIController)
+    public MoveState(StateMachine stateMachine, AIController aIController) 
+        : base(stateMachine, aIController)
     {
-        this.SubStateMachine = subStateMachine;
+        SubStateMachine = new StateMachine();
+
+        moveFrontState = new MoveFrontState(stateMachine, aIController);
+    }
+
+    public void StateInit(AttackState attackState)
+    {
         this.attackState = attackState;
+
+        // TODO : 순서 주의 ATTACK -> MOVE
+        moveFrontState.StateInit(attackState, this);
     }
 
     public override void Enter()
     {
-        time = 0f;
         controller.AnimationPlay(AnimationStrings.MOVE_ING);
+
+        // TODO : COVER 상태에 따라 COVER 이동
+        SubStateMachine.Initialize(moveFrontState);
     }
 
     public override void Exit()
     {
-        time = 0f;
+        
     }
 
     public override void Execute()
     {
-        controller.MoveFront();
+        SubStateMachine.Update();
 
-        time += Time.deltaTime;
 
-        if(time >= enemyDetectTime)
-        {
-            if(controller.EnemyDetection())
-            {
-                stateMachine.ChangeState(attackState);
-            }
-
-            time = 0f;
-        }
+    }
+    public void ChangeMainState(State state)
+    {
+        stateMachine.ChangeState(state);
     }
 }

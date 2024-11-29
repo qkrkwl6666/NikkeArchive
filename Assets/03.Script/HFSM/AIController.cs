@@ -101,7 +101,7 @@ public abstract class AIController : MonoBehaviour
     public void RotateFornt()
     {
         // 정면으로 회전
-        Vector3 forntDir = Vector3.right;
+        Vector3 forntDir = Vector3.forward;
 
         forntDir.Normalize();
 
@@ -115,6 +115,12 @@ public abstract class AIController : MonoBehaviour
     {
 
     }
+
+    public void SetNikkeData(NikkeStats nikkeStats)
+    {
+        NikkeStats = nikkeStats;
+    }
+
 }
 
 public enum Animation_State

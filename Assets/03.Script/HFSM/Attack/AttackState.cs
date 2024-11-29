@@ -12,6 +12,9 @@ public class AttackState : State
     private AttackDelayState attackDelayState;
     private AttackEndState attackEndState;
 
+    // Move
+    private MoveState moveState;
+
     public Attack_State CurrentAttackState { get; set; }
 
     public AttackState(StateMachine stateMachine, AIController controller) 
@@ -26,6 +29,11 @@ public class AttackState : State
         attackStartState.StateInit(attackIngState, attackDelayState);
         attackIngState.StateInit(attackDelayState, attackEndState);
         attackDelayState.StateInit(attackEndState, attackIngState);
+    }
+
+    public void StateInit(MoveState moveState)
+    {
+        this.moveState = moveState;
     }
 
     public override void Enter()
@@ -50,6 +58,23 @@ public class AttackState : State
         
         SubStateMachine.Update();
     }
+
+    #region 애니메이션 이벤트
+    public void AnimationAttackStartEvent()
+    {
+        attackStartState.AnimationEventAttackStartEnd();
+    }
+    public void AnimationAttackIngEvent()
+    {
+        attackIngState.AnimationEventAttackIngEnd();
+    }
+
+    public void AnimationAttackEndEvent()
+    {
+        
+    }
+    #endregion
+
 }
 
 public enum Attack_State
