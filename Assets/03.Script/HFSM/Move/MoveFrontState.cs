@@ -2,24 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveFrontState : State
+public class MoveFrontState : State, IObserver
 {
+    private StateSubject stateSubject;
+
     private AttackState attackState;
     private MoveState moveState;
 
     private float time = 0f;
     private float enemyDetectTime = 0.1f;
 
-    public MoveFrontState(StateMachine stateMachine, AIController aIController) : base(stateMachine, aIController)
+    public MoveFrontState(StateMachine stateMachine, AIController aIController, 
+        StateSubject stateSubject) : base(stateMachine, aIController)
     {
-
+        this.stateSubject = stateSubject;
+        stateSubject.RegisterObserver(this);
     }
 
-    public void StateInit(AttackState attackState, MoveState moveState)
-    {
-        this.attackState = attackState;
-        this.moveState = moveState;
-    }
+    //public void StateInit(AttackState attackState, MoveState moveState)
+    //{
+    //    this.attackState = attackState;
+    //    this.moveState = moveState;
+    //}
 
     public override void Enter()
     {
@@ -48,5 +52,11 @@ public class MoveFrontState : State
 
             time = 0f;
         }
+    }
+
+    public void Update()
+    {
+        attackState = stateSubject.AttackState;
+        moveState = stateSubject.MoveState;
     }
 }

@@ -6,15 +6,13 @@ using UnityEngine;
 public abstract class AIController : MonoBehaviour
 {
     protected Animator animator;
-    public Animation_State CurrentAnimationState {  get; set; }
+    public Animation_State CurrentAnimationState { get; set; } = Animation_State.NORMAL;
 
     private Dictionary<(string, Animation_State), string> animationCache = new ();
     public Creature TargetEnemy { get; private set; }
 
     public NikkeStats NikkeStats { get; private set; }
     public LinkedList<Creature> enemies = new ();
-
-    public float AttackRange { get; set; } = 10f;
 
     protected virtual void Start()
     {
@@ -119,6 +117,16 @@ public abstract class AIController : MonoBehaviour
     public void SetNikkeData(NikkeStats nikkeStats)
     {
         NikkeStats = nikkeStats;
+    }
+
+    public bool HasAmmo()
+    {
+        if(NikkeStats.CurrentAmmo > 0)
+        {
+            return true;
+        }   
+        
+        return false;
     }
 
 }

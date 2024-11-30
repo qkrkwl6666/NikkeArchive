@@ -30,19 +30,19 @@ public static class AnimationStrings
     public static readonly string ATTACK_ING_NORMAL = "Attack_Ing_Normal";
     public static readonly string ATTACK_END_NORMAL = "Attack_End_Normal";
     public static readonly string ATTACK_DELAY_NORMAL = "Attack_Delay_Normal";
-    public static readonly string Attack_RELOAD_Normal = "Attack_Reload_Normal";
+    public static readonly string ATTACK_RELOAD_Normal = "Attack_Reload_Normal";
 
     // ATTACK_KNEEL 애니메이션 STRING
     public static readonly string ATTACK_START_KNEEL = "Attack_Start_Kneel";
     public static readonly string ATTACK_ING_KNEEL = "Attack_Ing_Kneel";
     public static readonly string ATTACK_END_KNEEL = "Attack_End_Kneel";
     public static readonly string ATTACK_DELAY_KNEEL = "Attack_Delay_Kneel";
-    public static readonly string Attack_RELOAD_KNEEL = "Attack_Reload_Kneel";
+    public static readonly string ATTACK_RELOAD_KNEEL = "Attack_Reload_Kneel";
 
     // ATTACK
     public static readonly string ATTACK_START = "Attack_Start";
     public static readonly string ATTACK_ING = "Attack_Ing";
     public static readonly string ATTACK_END = "Attack_End";
     public static readonly string ATTACK_DELAY = "Attack_Delay";
-    public static readonly string Attack_RELOAD = "Attack_Reload";
+    public static readonly string ATTACK_RELOAD = "Attack_Reload";
 }

@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackIngState : State
+public class AttackIngState : State, IObserver
 {
+    StateSubject stateSubject;
+
     private AttackDelayState attackDelayState;
     private AttackEndState attackEndState;
 
-    public AttackIngState(StateMachine stateMachine, AIController aIController) 
+    public AttackIngState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject) 
         : base(stateMachine, aIController)
     {
-        
+        this.stateSubject = stateSubject;
+        stateSubject.RegisterObserver(this);
     }
 
     public void StateInit(AttackDelayState attackDelayState, AttackEndState attackEndState)
@@ -21,6 +24,7 @@ public class AttackIngState : State
 
     public override void Enter()
     {
+        controller.NikkeStats.CurrentAmmo--;
         controller.AnimationPlay(AnimationStrings.ATTACK_ING);
     }
 
@@ -43,5 +47,11 @@ public class AttackIngState : State
     public void AnimationEventAttackIngEnd()
     {
         stateMachine.ChangeState(attackDelayState);
+    }
+
+    public void Update()
+    {
+        attackDelayState = stateSubject.AttackDelayState;
+        attackEndState = stateSubject.AttackEndState;
     }
 }

@@ -20,6 +20,11 @@ public class StateMachine
         CurrentState?.Enter();
     }
 
+    public void CurrentStateExit()
+    {
+        CurrentState?.Exit();
+    }
+
     public void Update()
     {
         if (CurrentState == null) return;

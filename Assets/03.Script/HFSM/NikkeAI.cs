@@ -12,6 +12,9 @@ public class NikkeAI : AIController
     // 테스트 
     public Creature enemyTest1;
 
+    // StateSubject
+    private StateSubject stateSubject;
+
     private void Awake()
     {
         // 임시 니케 스텟
@@ -25,13 +28,19 @@ public class NikkeAI : AIController
     {
         base.Start();
 
+        stateSubject = new StateSubject();
+
         mainStateMachine = new StateMachine();
 
-        attackState = new AttackState(mainStateMachine, this);
-        moveState = new MoveState(mainStateMachine, this);
+        attackState = new AttackState(mainStateMachine, this, stateSubject);
+        moveState = new MoveState(mainStateMachine, this, stateSubject);
 
-        attackState.StateInit(moveState);
-        moveState.StateInit(attackState);
+        stateSubject.StateInit(attackState, moveState);
+
+        //attackState.StateInit(moveState);
+        //moveState.StateInit(attackState);
+
+        stateSubject.NotifyObserver();
 
         mainStateMachine.Initialize(moveState);
 
@@ -41,6 +50,19 @@ public class NikkeAI : AIController
     private void Update()
     {
         mainStateMachine.Update();
+
+        if (Input.GetKeyUp(KeyCode.F1)) 
+        {
+            CurrentAnimationState = Animation_State.NORMAL;
+        }
+        if (Input.GetKeyUp(KeyCode.F2))
+        {
+            CurrentAnimationState = Animation_State.STAND;
+        }
+        if (Input.GetKeyUp(KeyCode.F3))
+        {
+            CurrentAnimationState = Animation_State.KNEEL;
+        }
 
     }
 
@@ -66,5 +88,10 @@ public class NikkeAI : AIController
     {
         attackState.AnimationAttackEndEvent();
     }
+    public void AnimationAttackReloadEvent()
+    {
+        attackState.AnimationAttackReloadEvent();
+    }
+
     #endregion
 }

@@ -2,25 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackStartState : State
+public class AttackStartState : State, IObserver
 {
-    private AttackIngState attackIngState;
+    private StateSubject stateSubject;
+
     private AttackDelayState attackdelayState;
 
-    public AttackStartState(StateMachine stateMachine, AIController aIController) 
+    public AttackStartState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject) 
         : base(stateMachine, aIController)
     {
-
-    }
-
-    public void StateInit(AttackIngState attackIngState, AttackDelayState attackdelayState)
-    {
-        this.attackIngState = attackIngState;
-        this.attackdelayState = attackdelayState;
+        this.stateSubject = stateSubject;
+        stateSubject.RegisterObserver(this);
     }
 
     public override void Enter()
     {
+        Debug.Log(controller.TargetEnemy);
         controller.AnimationPlay(AnimationStrings.ATTACK_START);
     }
 
@@ -38,14 +35,25 @@ public class AttackStartState : State
 
     public void AnimationEventAttackStartEnd()
     {
-        // enemy null
-        if (controller.TargetEnemy == null || !controller.EnemyDetection())
-        {
-            // Todo : Delay 상태 이동
-            stateMachine.ChangeState(attackdelayState);
-            return;
-        }
-        stateMachine.ChangeState(attackIngState);
-    }
+        Debug.Log($"AnimationEventAttackStartEnd : {controller.TargetEnemy}");
 
+        bool isEnemyDetected = controller.EnemyDetection();
+
+        // enemy null
+        if (controller.TargetEnemy == null || !isEnemyDetected)
+        {
+            Debug.Log("controller.TargetEnemy == null || !isEnemyDetected");
+
+            return;
+            // Todo : Move State이동
+            //stateMachine.ChangeState(attackdelayState);
+        }
+
+        stateMachine.ChangeState(attackdelayState);
+    }                   
+
+    public void Update()
+    {
+        attackdelayState = stateSubject.AttackDelayState;
+    }
 }

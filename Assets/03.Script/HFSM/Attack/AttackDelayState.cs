@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackDelayState : State
+public class AttackDelayState : State, IObserver
 {
+    private StateSubject stateSubject;
+
     private AttackEndState attackEndState;
     private AttackIngState attackIngState;
-
-    public bool IsReloading { get; private set; } = false;
+    private AttackReloadState attackReloadState;
 
     private float time = 0f;
 
-    public AttackDelayState(StateMachine stateMachine, AIController aIController) 
+    // Main State Machine
+    private StateMachine mainStateMachine;
+    // Move State
+    private MoveState moveState;
+
+    public AttackDelayState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject) 
         : base(stateMachine, aIController)
     {
+        this.stateSubject = stateSubject;
 
-    }
-
-    public void StateInit(AttackEndState attackEndState, AttackIngState attackIngState)
-    {
-        this.attackEndState = attackEndState;
-        this.attackIngState = attackIngState;
+        stateSubject.RegisterObserver(this);
     }
 
     public override void Enter()
@@ -41,9 +43,34 @@ public class AttackDelayState : State
 
         time += Time.deltaTime;
 
-        if (time >= controller.NikkeStats.DelayTime && controller.TargetEnemy != null)
+        if (time >= controller.NikkeStats.DelayTime)
         {
-            stateMachine.ChangeState(attackIngState);
+            time = 0f;
+
+            ChangeStateEnemy();
         }
+    }
+
+
+    public void ChangeStateEnemy()
+    {
+        if (controller.TargetEnemy == null)
+        {
+            mainStateMachine.ChangeState(moveState);
+
+            return;
+        }
+
+        State state = controller.HasAmmo() ? attackIngState : attackReloadState;
+        stateMachine.ChangeState(state);
+    }
+
+    public void Update()
+    {
+        attackEndState = stateSubject.AttackEndState;
+        attackIngState = stateSubject.AttackIngState; 
+        attackReloadState = stateSubject.AttackReloadState;
+        mainStateMachine = stateSubject.MainStateMachine;
+        moveState = stateSubject.MoveState;
     }
 }

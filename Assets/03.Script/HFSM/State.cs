@@ -13,6 +13,11 @@ public abstract class State : IState
         this.controller = aIController;
     }
 
+    public StateMachine GetStateMachine()
+    {
+        return stateMachine;
+    }
+
     public virtual void Enter() { }
     public virtual void Execute() { }
     public virtual void Exit() { }
