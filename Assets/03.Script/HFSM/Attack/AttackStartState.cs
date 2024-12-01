@@ -35,17 +35,17 @@ public class AttackStartState : State, IObserver
     public void AnimationEventAttackStartEnd()
     {
 
-        bool isEnemyDetected = controller.EnemyDetection();
+        //bool isEnemyDetected = controller.EnemyDetection();
 
-        // enemy null
-        if (controller.TargetEnemy == null || !isEnemyDetected)
-        {
-            Debug.Log("controller.TargetEnemy == null || !isEnemyDetected");
+        //// enemy null
+        //if (controller.TargetEnemy == null || !isEnemyDetected)
+        //{
+        //    Debug.Log("controller.TargetEnemy == null || !isEnemyDetected");
 
-            return;
-            // Todo : Move State이동
-            //stateMachine.ChangeState(attackdelayState);
-        }
+        //    // Todo : Delay State이동
+        //    stateMachine.ChangeState(attackdelayState);
+        //    return;
+        //}
 
         stateMachine.ChangeState(attackdelayState);
     }                   

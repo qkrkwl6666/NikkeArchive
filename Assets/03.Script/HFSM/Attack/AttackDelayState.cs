@@ -54,7 +54,7 @@ public class AttackDelayState : State, IObserver
 
     public void ChangeStateEnemy()
     {
-        if (controller.TargetEnemy == null)
+        if (controller.TargetEnemy == null || !controller.EnemyDetection())
         {
             mainStateMachine.ChangeState(moveState);
 
