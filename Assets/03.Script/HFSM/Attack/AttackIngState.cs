@@ -7,7 +7,6 @@ public class AttackIngState : State, IObserver
     StateSubject stateSubject;
 
     private AttackDelayState attackDelayState;
-    private AttackEndState attackEndState;
 
     public AttackIngState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject) 
         : base(stateMachine, aIController)
@@ -46,6 +45,5 @@ public class AttackIngState : State, IObserver
     public void ObserverUpdate()
     {
         attackDelayState = stateSubject.AttackDelayState;
-        attackEndState = stateSubject.AttackEndState;
     }
 }

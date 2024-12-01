@@ -34,7 +34,8 @@ public abstract class AIController : MonoBehaviour
             animationCache.Add((name, CurrentAnimationState), fullName);
         }
 
-        animator.Play(fullName);
+        animator.SetTrigger(fullName);
+        //animator.Play(fullName);
     }
 
     private bool AnimationStringException(string name)

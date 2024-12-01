@@ -32,6 +32,8 @@ public class AttackReloadState : State, IObserver
 
     public void AnimationEventAttackReloadEnd()
     {
+        // TODO : 적 있으면 StartState 적 없으면 MoveState이동
+
         stateMachine.ChangeState(attackStartState);
     }
 
