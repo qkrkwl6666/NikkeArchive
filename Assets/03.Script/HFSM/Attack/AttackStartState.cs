@@ -17,7 +17,6 @@ public class AttackStartState : State, IObserver
 
     public override void Enter()
     {
-        Debug.Log(controller.TargetEnemy);
         controller.AnimationPlay(AnimationStrings.ATTACK_START);
     }
 
@@ -35,7 +34,6 @@ public class AttackStartState : State, IObserver
 
     public void AnimationEventAttackStartEnd()
     {
-        Debug.Log($"AnimationEventAttackStartEnd : {controller.TargetEnemy}");
 
         bool isEnemyDetected = controller.EnemyDetection();
 
@@ -52,7 +50,7 @@ public class AttackStartState : State, IObserver
         stateMachine.ChangeState(attackdelayState);
     }                   
 
-    public void Update()
+    public void ObserverUpdate()
     {
         attackdelayState = stateSubject.AttackDelayState;
     }

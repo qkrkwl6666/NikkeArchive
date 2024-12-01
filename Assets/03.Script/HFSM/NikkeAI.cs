@@ -93,5 +93,10 @@ public class NikkeAI : AIController
         attackState.AnimationAttackReloadEvent();
     }
 
+    public void AnimationMoveEndEvent()
+    {
+        moveState.AnimationMoveEndEvent();
+    }
+
     #endregion
 }

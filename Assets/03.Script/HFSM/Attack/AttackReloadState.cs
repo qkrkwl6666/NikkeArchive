@@ -35,7 +35,7 @@ public class AttackReloadState : State, IObserver
         stateMachine.ChangeState(attackStartState);
     }
 
-    public void Update()
+    public void ObserverUpdate()
     {
         attackStartState = stateSubject.AttackStartState;
     }

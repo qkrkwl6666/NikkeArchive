@@ -20,7 +20,7 @@ public static class AnimationStrings
 
     // ATTACK_STAND 애니메이션 STRING
     public static readonly string ATTACK_START_STAND = "Attack_Start_Stand";
-    public static readonly string ATTACK_ING_STAND = "Attack_ING_Stand";
+    public static readonly string ATTACK_ING_STAND = "Attack_Ing_Stand";
     public static readonly string ATTACK_END_STAND = "Attack_End_Stand";
     public static readonly string ATTACK_DELAY_STAND = "Attack_Delay_Stand";
     public static readonly string ATTACK_RELOAD_STAND = "Attack_Reload_Stand";
@@ -45,4 +45,7 @@ public static class AnimationStrings
     public static readonly string ATTACK_END = "Attack_End";
     public static readonly string ATTACK_DELAY = "Attack_Delay";
     public static readonly string ATTACK_RELOAD = "Attack_Reload";
+
+    // MOVE
+    public static readonly string MOVE_END = "Move_End";
 }

@@ -9,7 +9,8 @@ public class MoveState : State, IObserver
     public StateMachine SubStateMachine { get; private set; }
 
     // Move State
-    public MoveFrontState MoveFrontState { get; private set; }
+    public MoveIngState MoveIngState { get; private set; }
+    public MoveEndState MoveEndState { get; private set; }
 
     // Attack State
     private AttackState attackState;
@@ -22,23 +23,16 @@ public class MoveState : State, IObserver
 
         SubStateMachine = new StateMachine();
 
-        MoveFrontState = new MoveFrontState(stateMachine, aIController, stateSubject);
+        MoveIngState = new MoveIngState(stateMachine, aIController, stateSubject);
+        MoveEndState = new MoveEndState(stateMachine, aIController, stateSubject);
     }
-
-    //public void StateInit(AttackState attackState)
-    //{
-    //    this.attackState = attackState;
-
-    //    // TODO : 순서 주의 ATTACK -> MOVE
-    //    MoveFrontState.StateInit(attackState, this);
-    //}
 
     public override void Enter()
     {
         controller.AnimationPlay(AnimationStrings.MOVE_ING);
 
         // TODO : COVER 감지 후 있으면 COVER 없으면 Front
-        SubStateMachine.Initialize(MoveFrontState);
+        SubStateMachine.Initialize(MoveIngState);
     }
 
     public override void Exit()
@@ -57,9 +51,18 @@ public class MoveState : State, IObserver
         stateMachine.ChangeState(state);
     }
 
-    public void Update()
+    public void ObserverUpdate()
     {
         attackState = stateSubject.AttackState;
-        MoveFrontState = stateSubject.MoveFrontState;
+        MoveIngState = stateSubject.MoveIngState;
     }
+
+    #region 애니메이션 이벤트
+
+    public void AnimationMoveEndEvent()
+    {
+        MoveEndState.AnimationEventMoveEnd();
+    }
+
+    #endregion
 }

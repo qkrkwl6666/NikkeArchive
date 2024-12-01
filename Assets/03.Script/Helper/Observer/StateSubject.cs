@@ -19,7 +19,8 @@ public class StateSubject : ISubject
 
     // MoveState
     public MoveState MoveState { get; private set; } // Main
-    public MoveFrontState MoveFrontState { get; private set; } // Sub
+    public MoveIngState MoveIngState { get; private set; } // Sub
+    public MoveEndState MoveEndState { get; private set; } // Sub
 
     public void StateInit(AttackState attackState, MoveState moveState)
     {
@@ -31,7 +32,8 @@ public class StateSubject : ISubject
         this.AttackDelayState = attackState.AttackDelayState;
 
         this.MoveState = moveState;
-        this.MoveFrontState = moveState.MoveFrontState;
+        this.MoveIngState = moveState.MoveIngState;
+        this.MoveEndState = moveState.MoveEndState;
 
         this.MainStateMachine = attackState.GetStateMachine();
     }
@@ -53,7 +55,7 @@ public class StateSubject : ISubject
     {
         foreach (IObserver observer in observers)
         {
-            observer.Update();
+            observer.ObserverUpdate();
         }
     }
 

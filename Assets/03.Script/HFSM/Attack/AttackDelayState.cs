@@ -65,7 +65,7 @@ public class AttackDelayState : State, IObserver
         stateMachine.ChangeState(state);
     }
 
-    public void Update()
+    public void ObserverUpdate()
     {
         attackEndState = stateSubject.AttackEndState;
         attackIngState = stateSubject.AttackIngState; 

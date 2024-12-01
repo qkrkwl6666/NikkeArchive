@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class AIController : MonoBehaviour
 {
     protected Animator animator;
+
     public Animation_State CurrentAnimationState { get; set; } = Animation_State.NORMAL;
 
     private Dictionary<(string, Animation_State), string> animationCache = new ();
@@ -59,7 +60,7 @@ public abstract class AIController : MonoBehaviour
         }
     }
 
-    public bool EnemyDetection()
+    public bool EnemyDetection(float detectionMargin = 0f)
     {
         TargetEnemy = null;
 
@@ -69,7 +70,7 @@ public abstract class AIController : MonoBehaviour
         {
             float distance = Vector3.Distance(enemy.transform.position, transform.position);
 
-            if (distance <= NikkeStats.AttackRange && distance < frevDistance)
+            if (distance <= NikkeStats.AttackRange + detectionMargin && distance < frevDistance)
             {
                 frevDistance = distance;
                 TargetEnemy = enemy;

@@ -35,16 +35,7 @@ public class AttackState : State, IObserver
         AttackIngState = new AttackIngState(SubStateMachine, controller, stateSubject);
         AttackDelayState = new AttackDelayState(SubStateMachine, controller, stateSubject);
         AttackReloadState = new AttackReloadState(SubStateMachine, controller, stateSubject);
-
-        //AttackStartState.StateInit(AttackIngState, AttackDelayState);
-        //AttackIngState.StateInit(AttackDelayState, AttackEndState);
-        //AttackDelayState.StateInit(AttackEndState, AttackIngState, stateMachine, moveState);
     }
-
-    //public void StateInit(MoveState moveState)
-    //{
-    //    this.moveState = moveState;
-    //}
 
     public override void Enter()
     {
@@ -95,7 +86,7 @@ public class AttackState : State, IObserver
         
     }
 
-    public void Update()
+    public void ObserverUpdate()
     {
         moveState = stateSubject.MoveState;
     }

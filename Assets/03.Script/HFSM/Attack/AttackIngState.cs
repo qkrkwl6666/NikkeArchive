@@ -16,12 +16,6 @@ public class AttackIngState : State, IObserver
         stateSubject.RegisterObserver(this);
     }
 
-    public void StateInit(AttackDelayState attackDelayState, AttackEndState attackEndState)
-    {
-        this.attackDelayState = attackDelayState;
-        this.attackEndState = attackEndState;
-    }
-
     public override void Enter()
     {
         controller.NikkeStats.CurrentAmmo--;
@@ -49,7 +43,7 @@ public class AttackIngState : State, IObserver
         stateMachine.ChangeState(attackDelayState);
     }
 
-    public void Update()
+    public void ObserverUpdate()
     {
         attackDelayState = stateSubject.AttackDelayState;
         attackEndState = stateSubject.AttackEndState;
