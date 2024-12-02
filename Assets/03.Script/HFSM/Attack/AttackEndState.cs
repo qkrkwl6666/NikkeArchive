@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public class AttackEndState : State
+public class AttackEndState : State, IObserver
 {
+    private StateSubject stateSubject;
 
-    public AttackEndState(StateMachine stateMachine, AIController aIController) : base(stateMachine, aIController)
+    private StateMachine mainStateMachine;
+
+    //private MoveState moveState;
+    private IdleState idleState;
+
+    public AttackEndState(StateMachine stateMachine, AIController aIController, 
+        StateSubject stateSubject) : base(stateMachine, aIController)
     {
+        this.stateSubject = stateSubject;
 
+        stateSubject.RegisterObserver(this);
     }
 
     public override void Enter()
     {
-        controller.SubState = Sub_State.ATTACK_DELAY;
+        controller.AnimationPlay(AnimationStrings.ATTACK_END);
+        controller.SubState = Sub_State.ATTACK_END;
     }
 
     public override void Exit()
@@ -25,5 +36,17 @@ public class AttackEndState : State
         if (controller == null) return;
 
 
+    }
+    public void AnimationAttackEndEvent()
+    {
+        // IDLE 상태 이동
+        mainStateMachine.ChangeState(idleState);
+    }
+
+    public void ObserverUpdate()
+    {
+        //moveState = stateSubject.MoveState;
+        idleState = stateSubject.IdleState;
+        mainStateMachine = stateSubject.MainStateMachine;
     }
 }

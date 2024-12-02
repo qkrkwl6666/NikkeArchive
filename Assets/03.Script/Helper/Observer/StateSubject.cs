@@ -22,7 +22,10 @@ public class StateSubject : ISubject
     public MoveIngState MoveIngState { get; private set; } // Sub
     public MoveEndState MoveEndState { get; private set; } // Sub
 
-    public void StateInit(AttackState attackState, MoveState moveState)
+    // IdleState
+    public IdleState IdleState { get; private set; } // Main
+
+    public void StateInit(AttackState attackState, MoveState moveState, IdleState idleState)
     {
         this.AttackState = attackState;
         this.AttackStartState = attackState.AttackStartState;
@@ -34,6 +37,7 @@ public class StateSubject : ISubject
         this.MoveState = moveState;
         this.MoveIngState = moveState.MoveIngState;
         this.MoveEndState = moveState.MoveEndState;
+        this.IdleState = idleState;
 
         this.MainStateMachine = attackState.GetStateMachine();
     }

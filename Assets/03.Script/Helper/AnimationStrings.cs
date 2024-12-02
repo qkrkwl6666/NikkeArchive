@@ -48,4 +48,6 @@ public static class AnimationStrings
 
     // MOVE
     public static readonly string MOVE_END = "Move_End";
+    // IDLE
+    public static readonly string IDLE = "Idle";
 }

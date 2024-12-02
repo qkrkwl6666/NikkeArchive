@@ -35,6 +35,7 @@ public class AttackState : State, IObserver
         AttackIngState = new AttackIngState(SubStateMachine, controller, stateSubject);
         AttackDelayState = new AttackDelayState(SubStateMachine, controller, stateSubject);
         AttackReloadState = new AttackReloadState(SubStateMachine, controller, stateSubject);
+        AttackEndState = new AttackEndState(SubStateMachine, controller, stateSubject);
     }
 
     public override void Enter()
@@ -89,7 +90,7 @@ public class AttackState : State, IObserver
 
     public void AnimationAttackEndEvent()
     {
-        
+        AttackEndState.AnimationAttackEndEvent();
     }
 
     public void ObserverUpdate()

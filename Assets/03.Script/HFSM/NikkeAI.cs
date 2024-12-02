@@ -6,6 +6,7 @@ public class NikkeAI : AIController
 {
     public AttackState AttackState { get; private set; } 
     public MoveState MoveState { get; private set; }
+    public IdleState IdleState { get; private set; }
 
     public StateMachine MainStateMachine { get; private set; } // MainState
 
@@ -34,11 +35,9 @@ public class NikkeAI : AIController
 
         AttackState = new AttackState(MainStateMachine, this, stateSubject);
         MoveState = new MoveState(MainStateMachine, this, stateSubject);
+        IdleState = new IdleState(MainStateMachine, this, stateSubject); 
 
-        stateSubject.StateInit(AttackState, MoveState);
-
-        //attackState.StateInit(moveState);
-        //moveState.StateInit(attackState);
+        stateSubject.StateInit(AttackState, MoveState, IdleState);
 
         stateSubject.NotifyObserver();
 

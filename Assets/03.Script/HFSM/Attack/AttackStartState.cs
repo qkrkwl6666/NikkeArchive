@@ -35,19 +35,6 @@ public class AttackStartState : State, IObserver
 
     public void AnimationEventAttackStartEnd()
     {
-
-        //bool isEnemyDetected = controller.EnemyDetection();
-
-        //// enemy null
-        //if (controller.TargetEnemy == null || !isEnemyDetected)
-        //{
-        //    Debug.Log("controller.TargetEnemy == null || !isEnemyDetected");
-
-        //    // Todo : Delay State¿Ãµø
-        //    stateMachine.ChangeState(attackdelayState);
-        //    return;
-        //}
-
         stateMachine.ChangeState(attackdelayState);
     }                   
 

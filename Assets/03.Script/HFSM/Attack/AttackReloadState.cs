@@ -7,9 +7,13 @@ public class AttackReloadState : State, IObserver
 {
     private StateSubject stateSubject;
 
-    private AttackStartState attackStartState; // Sub
-    private MoveState moveState; // Main
     private StateMachine mainStateMachine;
+
+    private MoveState moveState; // Main
+    private IdleState idleState; // Main
+    private AttackStartState attackStartState; // Sub
+    
+    
 
     public AttackReloadState(StateMachine stateMachine, AIController aIController, 
         StateSubject stateSubject) : base(stateMachine, aIController)
@@ -36,10 +40,10 @@ public class AttackReloadState : State, IObserver
 
     public void AnimationEventAttackReloadEnd()
     {
-        // TODO : 적 있으면 StartState 적 없으면 MoveState이동
+        // TODO : IDLE 상태로 이동
         if (!controller.EnemyDetection())
         {
-            mainStateMachine.ChangeState(moveState);
+            mainStateMachine.ChangeState(idleState);
             return;
         }
 
@@ -51,5 +55,6 @@ public class AttackReloadState : State, IObserver
         attackStartState = stateSubject.AttackStartState;
         mainStateMachine = stateSubject.MainStateMachine;
         moveState = stateSubject.MoveState;
+        idleState = stateSubject.IdleState;
     }
 }
