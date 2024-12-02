@@ -25,6 +25,7 @@ public class MoveIngState : State, IObserver
 
     public override void Enter()
     {
+        controller.SubState = Sub_State.MOVE_ING;
         time = 0f;
     }
 

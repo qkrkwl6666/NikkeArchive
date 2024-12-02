@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using static NikkeAI;
 
 public abstract class AIController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public abstract class AIController : MonoBehaviour
 
     public NikkeStats NikkeStats { get; private set; }
     public LinkedList<Creature> enemies = new ();
+
+    public Sub_State SubState { get; set; }
 
     protected virtual void Start()
     {
@@ -138,4 +141,19 @@ public enum Animation_State
     NORMAL,
     STAND,
     KNEEL,
+}
+
+// Sub ป๓ลย
+public enum Sub_State
+{
+    // ATTACK
+    ATTACK_START,
+    ATTACK_ING,
+    ATTACK_DELAY,
+    ATTACK_END,
+    ATTACK_RELOAD,
+
+    // MOVE
+    MOVE_ING,
+    MOVE_END,
 }

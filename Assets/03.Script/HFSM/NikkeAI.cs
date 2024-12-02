@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class NikkeAI : AIController
 {
-    private AttackState attackState;
-    private MoveState moveState;
+    public AttackState AttackState { get; private set; } 
+    public MoveState MoveState { get; private set; }
 
-    private StateMachine mainStateMachine; // MainState
+    public StateMachine MainStateMachine { get; private set; } // MainState
 
     // 테스트 
     public Creature enemyTest1;
@@ -30,26 +30,26 @@ public class NikkeAI : AIController
 
         stateSubject = new StateSubject();
 
-        mainStateMachine = new StateMachine();
+        MainStateMachine = new StateMachine();
 
-        attackState = new AttackState(mainStateMachine, this, stateSubject);
-        moveState = new MoveState(mainStateMachine, this, stateSubject);
+        AttackState = new AttackState(MainStateMachine, this, stateSubject);
+        MoveState = new MoveState(MainStateMachine, this, stateSubject);
 
-        stateSubject.StateInit(attackState, moveState);
+        stateSubject.StateInit(AttackState, MoveState);
 
         //attackState.StateInit(moveState);
         //moveState.StateInit(attackState);
 
         stateSubject.NotifyObserver();
 
-        mainStateMachine.Initialize(moveState);
+        MainStateMachine.Initialize(MoveState);
 
         enemies.AddFirst(enemyTest1);
     }
 
     private void Update()
     {
-        mainStateMachine.Update();
+        MainStateMachine.Update();
 
         if (Input.GetKeyUp(KeyCode.F1)) 
         {
@@ -76,27 +76,28 @@ public class NikkeAI : AIController
     #region 애니메이션 이벤트
     public void AnimationAttackStartEvent()
     {
-        attackState.AnimationAttackStartEvent();
+        AttackState.AnimationAttackStartEvent();
     }
 
     public void AnimationAttackIngEvent()
     {
-        attackState.AnimationAttackIngEvent();
+        AttackState.AnimationAttackIngEvent();
     }
 
     public void AnimationAttackEndEvent()
     {
-        attackState.AnimationAttackEndEvent();
+        AttackState.AnimationAttackEndEvent();
     }
     public void AnimationAttackReloadEvent()
     {
-        attackState.AnimationAttackReloadEvent();
+        AttackState.AnimationAttackReloadEvent();
     }
 
     public void AnimationMoveEndEvent()
     {
-        moveState.AnimationMoveEndEvent();
+        MoveState.AnimationMoveEndEvent();
     }
 
     #endregion
+
 }

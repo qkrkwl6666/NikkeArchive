@@ -19,7 +19,7 @@ public class AttackState : State, IObserver
     // Move
     private MoveState moveState;
 
-    public Attack_State CurrentAttackState { get; set; }
+    public Attack_State CurrentAttackState { get; set; } = Attack_State.ATTACK_START;
 
 
     public AttackState(StateMachine stateMachine, AIController controller, StateSubject stateSubject) 
@@ -39,7 +39,13 @@ public class AttackState : State, IObserver
 
     public override void Enter()
     {
-        
+        if (!controller.EnemyDetection())
+        {
+            stateMachine.ChangeState(moveState);
+            return;
+        }
+
+
         if (!controller.HasAmmo())
         {
             SubStateMachine.Initialize(AttackReloadState);
@@ -101,4 +107,5 @@ public enum Attack_State
     ATTACK_ING,
     ATTACK_DELAY,
     ATTACK_END,
+    ATTACK_RELOAD,
 }

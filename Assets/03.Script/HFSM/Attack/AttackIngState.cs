@@ -19,6 +19,7 @@ public class AttackIngState : State, IObserver
     {
         controller.NikkeStats.CurrentAmmo--;
         controller.AnimationPlay(AnimationStrings.ATTACK_ING);
+        controller.SubState = Sub_State.ATTACK_ING;
     }
 
     public override void Exit()
@@ -30,10 +31,12 @@ public class AttackIngState : State, IObserver
     {
         if (controller == null) return;
 
-        if(controller.TargetEnemy == null)
-        {
-            stateMachine.ChangeState(attackDelayState);
-        }
+        //if(controller.TargetEnemy == null || !controller.EnemyDetection())
+        //{
+        //    Debug.Log("controller.TargetEnemy == null || !controller.EnemyDetection()");
+        //    stateMachine.ChangeState(attackDelayState);
+        //    return;
+        //}
 
     }
 

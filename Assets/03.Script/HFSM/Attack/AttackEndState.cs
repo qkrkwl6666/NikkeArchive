@@ -12,7 +12,7 @@ public class AttackEndState : State
 
     public override void Enter()
     {
-
+        controller.SubState = Sub_State.ATTACK_DELAY;
     }
 
     public override void Exit()

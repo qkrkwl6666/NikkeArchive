@@ -28,7 +28,7 @@ public class AttackDelayState : State, IObserver
     public override void Enter()
     {
         controller.AnimationPlay(AnimationStrings.ATTACK_DELAY);
-
+        controller.SubState = Sub_State.ATTACK_DELAY;
         time = 0f;
     }
 
@@ -54,7 +54,7 @@ public class AttackDelayState : State, IObserver
 
     public void ChangeStateEnemy()
     {
-        if (controller.TargetEnemy == null || !controller.EnemyDetection())
+        if (!controller.EnemyDetection())
         {
             mainStateMachine.ChangeState(moveState);
 

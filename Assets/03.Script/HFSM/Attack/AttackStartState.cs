@@ -18,6 +18,7 @@ public class AttackStartState : State, IObserver
     public override void Enter()
     {
         controller.AnimationPlay(AnimationStrings.ATTACK_START);
+        controller.SubState = Sub_State.ATTACK_START;
     }
 
     public override void Exit()
