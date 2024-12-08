@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class MoveState : State, IObserver
 {
     private StateSubject stateSubject;
@@ -9,13 +5,14 @@ public class MoveState : State, IObserver
     public StateMachine SubStateMachine { get; private set; }
 
     // Move State
-    public MoveIngState MoveIngState { get; private set; }
+    public MovingState MovingState { get; private set; }
     public MoveEndState MoveEndState { get; private set; }
+    public MoveCoverState MoveCoverState { get; private set; }
 
     // Attack State
     private AttackState attackState;
 
-    public MoveState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject) 
+    public MoveState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject)
         : base(stateMachine, aIController)
     {
         this.stateSubject = stateSubject;
@@ -23,18 +20,25 @@ public class MoveState : State, IObserver
 
         SubStateMachine = new StateMachine();
 
-        MoveIngState = new MoveIngState(stateMachine, aIController, stateSubject);
+        MovingState = new MovingState(stateMachine, aIController, stateSubject);
         MoveEndState = new MoveEndState(stateMachine, aIController, stateSubject);
+        MoveCoverState = new MoveCoverState(stateMachine, aIController, stateSubject);
     }
 
     public override void Enter()
     {
         controller.AnimationPlay(AnimationStrings.MOVE_ING);
 
-        // TODO : COVER 감지 후 있으면 COVER 없으면 Front
-        SubStateMachine.Initialize(MoveIngState);
+        if(controller.CoverObject == null)
+        {
+            SubStateMachine.Initialize(MovingState);
+        }
+        else
+        {
+            SubStateMachine.Initialize(MoveCoverState);
+        }  
     }
-
+        
     public override void Exit()
     {
         SubStateMachine.CurrentStateExit();
@@ -54,7 +58,7 @@ public class MoveState : State, IObserver
     public void ObserverUpdate()
     {
         attackState = stateSubject.AttackState;
-        MoveIngState = stateSubject.MoveIngState;
+        MovingState = stateSubject.MovingState;
     }
 
     #region 애니메이션 이벤트

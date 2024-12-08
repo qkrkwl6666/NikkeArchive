@@ -1,12 +1,6 @@
-using JetBrains.Annotations;
-using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Schema;
-using Unity.VisualScripting;
-using UnityEditor.SceneTemplate;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.PlayerLoop;
 
 public class FormationAnimationTest : MonoBehaviour
 {
@@ -14,7 +8,7 @@ public class FormationAnimationTest : MonoBehaviour
     private FormationAnimationState currentState = FormationAnimationState.IDLE;
     private TwoBoneIKConstraint twoBoneIKConstraint;
 
-    private static List<string> animationNames = new ();
+    private static List<string> animationNames = new();
 
     private Vector3 pos = Vector3.zero;
 
@@ -34,7 +28,7 @@ public class FormationAnimationTest : MonoBehaviour
 
     private void Update()
     {
-        
+
 
         //time += Time.deltaTime;
 

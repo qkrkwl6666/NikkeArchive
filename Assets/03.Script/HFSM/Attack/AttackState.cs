@@ -1,8 +1,4 @@
-    using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.SceneTemplate;
-using UnityEngine;
+using System.Diagnostics;
 
 public class AttackState : State, IObserver
 {
@@ -22,14 +18,14 @@ public class AttackState : State, IObserver
     public Attack_State CurrentAttackState { get; set; } = Attack_State.ATTACK_START;
 
 
-    public AttackState(StateMachine stateMachine, AIController controller, StateSubject stateSubject) 
+    public AttackState(StateMachine stateMachine, AIController controller, StateSubject stateSubject)
         : base(stateMachine, controller)
     {
         this.stateSubject = stateSubject;
 
         stateSubject.RegisterObserver(this);
 
-        SubStateMachine = new StateMachine();   
+        SubStateMachine = new StateMachine();
 
         AttackStartState = new AttackStartState(SubStateMachine, controller, stateSubject);
         AttackIngState = new AttackIngState(SubStateMachine, controller, stateSubject);
@@ -42,6 +38,7 @@ public class AttackState : State, IObserver
     {
         if (!controller.EnemyDetection())
         {
+            UnityEngine.Debug.Log("AttackState Enter !controller.EnemyDetection()");
             stateMachine.ChangeState(moveState);
             return;
         }
@@ -56,20 +53,27 @@ public class AttackState : State, IObserver
         SubStateMachine.Initialize(AttackStartState);
     }
 
-    public override void Exit() 
+    public override void Exit()
     {
         // SubState Exit Ã³¸®
         SubStateMachine.CurrentStateExit();
+
+        if(controller.CoverObject != null)
+        {
+            controller.CoverObject.UnCover();
+            controller.CoverObject = null;
+        }
     }
+
     public override void Execute()
     {
         if (controller == null) return;
 
-        if(controller.TargetEnemy != null)
+        if (controller.TargetEnemy != null)
         {
             controller.RotateEnemy();
         }
-        
+
         SubStateMachine.Update();
     }
 
@@ -83,7 +87,7 @@ public class AttackState : State, IObserver
     {
         AttackIngState.AnimationEventAttackIngEnd();
     }
-    public void AnimationAttackReloadEvent() 
+    public void AnimationAttackReloadEvent()
     {
         AttackReloadState.AnimationEventAttackReloadEnd();
     }

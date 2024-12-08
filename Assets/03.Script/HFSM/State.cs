@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public abstract class State : IState
 {
     protected StateMachine stateMachine;
     protected AIController controller;
 
     protected State(StateMachine stateMachine, AIController aIController)
-    { 
-        this.stateMachine = stateMachine; 
+    {
+        this.stateMachine = stateMachine;
         this.controller = aIController;
     }
 
@@ -21,4 +17,4 @@ public abstract class State : IState
     public virtual void Enter() { }
     public virtual void Execute() { }
     public virtual void Exit() { }
-}   
+}

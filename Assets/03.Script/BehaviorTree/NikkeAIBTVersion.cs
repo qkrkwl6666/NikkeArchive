@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ public class NikkeAIBTVersion : MonoBehaviour
 
     private void Awake()
     {
-        
+
     }
 
     private void Start()
@@ -43,7 +42,7 @@ public class NikkeAIBTVersion : MonoBehaviour
     private IBTNode.BTNodeState CheckAttacking()
     {
         // TODO : RUNNING 에서 공격 업데이트 
-        switch(currentAnimationState)
+        switch (currentAnimationState)
         {
             case Animation_State.NORMAL:
                 if (IsAnimationRunning(AnimationStrings.ATTACK_ING_NORMAL)) return IBTNode.BTNodeState.Running;
@@ -65,7 +64,7 @@ public class NikkeAIBTVersion : MonoBehaviour
 
         float frevDistance = float.MaxValue;
 
-        foreach(var enemy in enemys)
+        foreach (var enemy in enemys)
         {
             float distance = Vector3.Distance(enemy.transform.position, transform.position);
 
@@ -83,14 +82,14 @@ public class NikkeAIBTVersion : MonoBehaviour
 
     private void Attack()
     {
-        if(targetEnemy == null) return;
+        if (targetEnemy == null) return;
 
         // 적 방향으로 회전
         Vector3 enemyDir = (targetEnemy.transform.position - transform.position);
         enemyDir.y = 0;
         enemyDir.Normalize();
 
-        transform.rotation = 
+        transform.rotation =
             Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(enemyDir), rotationSpeed * Time.deltaTime);
 
 
@@ -98,10 +97,10 @@ public class NikkeAIBTVersion : MonoBehaviour
 
     private bool IsAnimationRunning(string animationName)
     {
-        if(animator == null) return false;
+        if (animator == null) return false;
 
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName(animationName)) return true;
-        
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName(animationName)) return true;
+
         return false;
     }
 }

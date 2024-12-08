@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackDelayState : State, IObserver
@@ -17,7 +15,7 @@ public class AttackDelayState : State, IObserver
     // Move State
     private MoveState moveState;
 
-    public AttackDelayState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject) 
+    public AttackDelayState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject)
         : base(stateMachine, aIController)
     {
         this.stateSubject = stateSubject;
@@ -69,7 +67,7 @@ public class AttackDelayState : State, IObserver
     public void ObserverUpdate()
     {
         attackEndState = stateSubject.AttackEndState;
-        attackIngState = stateSubject.AttackIngState; 
+        attackIngState = stateSubject.AttackIngState;
         attackReloadState = stateSubject.AttackReloadState;
         mainStateMachine = stateSubject.MainStateMachine;
         moveState = stateSubject.MoveState;

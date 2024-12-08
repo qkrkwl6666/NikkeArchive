@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class NikkeStats
 {
-    public int Hp {  get; private set; } // 체력
-    public int MaxHp {  get; private set; } // 최대 체력
+    public int Hp { get; private set; } // 체력
+    public int MaxHp { get; private set; } // 최대 체력
     public int Defence { get; private set; } // 방어력
     public float Attack { get; private set; } // 공격력
     public BustType BustType { get; set; } // 버스트 
@@ -20,7 +16,8 @@ public class NikkeStats
     public float MoveSpeed { get; private set; } = 4f;// 이동 속도
     public int MaxAmmo { get; private set; } = 5; // 최대 탄약
     public int CurrentAmmo { get; set; } = 5; // 현재 탄약
-    public float AttackRange { get; private set; } = 8f;// 공격 사거리
+    public float AttackRange { get; private set; } = 13f;// 공격 사거리
+    public float CoverRange { get; private set; } = 10f;// 커버 탐지 사거리
     public int AttackCount { get; private set; } // 공격 횟수
 
     public void ReloadAmmo()
@@ -45,7 +42,7 @@ public enum CodeChip
     ELECTRIC = 3, // 전격
     WATER = 4,    // 수냉
 
-    COUNT,    
+    COUNT,
 }
 
 public enum Weapon

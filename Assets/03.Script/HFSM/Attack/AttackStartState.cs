@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class AttackStartState : State, IObserver
 {
     private StateSubject stateSubject;
 
     private AttackDelayState attackdelayState;
 
-    public AttackStartState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject) 
+    public AttackStartState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject)
         : base(stateMachine, aIController)
     {
         this.stateSubject = stateSubject;
@@ -36,7 +32,7 @@ public class AttackStartState : State, IObserver
     public void AnimationEventAttackStartEnd()
     {
         stateMachine.ChangeState(attackdelayState);
-    }                   
+    }
 
     public void ObserverUpdate()
     {

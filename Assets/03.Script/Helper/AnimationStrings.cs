@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public static class AnimationStrings 
+public static class AnimationStrings
 {
     // IDLE 애니메이션 STRING
     public static readonly string IDLE_NORMAL = "Idle_Normal";
     public static readonly string IDLE_STAND = "Idle_Stand";
     public static readonly string IDLE_KNEEL = "Idle_Kneel";
-    
+
     public static readonly string CALLSIGN_NORMAL = "Callsign_Normal";
 
     // MOVE 애니메이션 STRING

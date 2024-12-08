@@ -13,8 +13,6 @@ support@keviniglesias.com
 =============================================================================================
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace KevinIglesias
@@ -23,20 +21,22 @@ namespace KevinIglesias
     {
         [SerializeField]
         private string removeParameter = ""; //ANIMATOR PARAMETER TO BE DISABLED OR RESET
-        
+
         [SerializeField]
         private bool isInteger = false; //ENABLE THIS IN THE INSPECTOR IF THE PARAMETER IS AN INTEGER
-        
+
         //THIS WILL BE CALLED RIGHT AFTER BEGIN THE TRANSITION TO THE NEW STATE
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if(isInteger)
+            if (isInteger)
             {
                 animator.SetInteger(removeParameter, 0); //RESET ANIMATOR PARAMETER TO ZERO
-            }else{
+            }
+            else
+            {
                 animator.SetBool(removeParameter, false); //DISABLE ANIMATOR PARAMETER
             }
-            
+
         }
     }
 }

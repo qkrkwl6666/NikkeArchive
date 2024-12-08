@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-
 public class AttackReloadState : State, IObserver
 {
     private StateSubject stateSubject;
@@ -12,10 +7,9 @@ public class AttackReloadState : State, IObserver
     private MoveState moveState; // Main
     private IdleState idleState; // Main
     private AttackStartState attackStartState; // Sub
-    
-    
+    private AttackDelayState attackDelayState;
 
-    public AttackReloadState(StateMachine stateMachine, AIController aIController, 
+    public AttackReloadState(StateMachine stateMachine, AIController aIController,
         StateSubject stateSubject) : base(stateMachine, aIController)
     {
         this.stateSubject = stateSubject;
@@ -40,10 +34,10 @@ public class AttackReloadState : State, IObserver
 
     public void AnimationEventAttackReloadEnd()
     {
-        // TODO : IDLE 상태로 이동
+
         if (!controller.EnemyDetection())
         {
-            mainStateMachine.ChangeState(idleState);
+            mainStateMachine.ChangeState(attackDelayState);
             return;
         }
 
@@ -53,6 +47,7 @@ public class AttackReloadState : State, IObserver
     public void ObserverUpdate()
     {
         attackStartState = stateSubject.AttackStartState;
+        attackDelayState = stateSubject.AttackDelayState;
         mainStateMachine = stateSubject.MainStateMachine;
         moveState = stateSubject.MoveState;
         idleState = stateSubject.IdleState;

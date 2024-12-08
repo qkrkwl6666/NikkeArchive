@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IdleState : State, IObserver
 {
-    private StateSubject stateSubject; 
+    private StateSubject stateSubject;
     private StateMachine mainStateMachine; // Main
 
     private AttackState attackState;
@@ -13,7 +11,7 @@ public class IdleState : State, IObserver
     private float time;
     private float idleDuration = 2f;
 
-    public IdleState(StateMachine stateMachine, AIController aIController, 
+    public IdleState(StateMachine stateMachine, AIController aIController,
         StateSubject stateSubject) : base(stateMachine, aIController)
     {
         this.stateSubject = stateSubject;
@@ -40,10 +38,10 @@ public class IdleState : State, IObserver
     public override void Execute()
     {
         time += Time.deltaTime;
-        
+
         // 임시로 일정 시간 지나면 moveState 이동
         // 나중에는 배틀 매니저랑 연동 시키기
-        if (time >= idleDuration) 
+        if (time >= idleDuration)
         {
             // MoveState 이동
             mainStateMachine.ChangeState(moveState);

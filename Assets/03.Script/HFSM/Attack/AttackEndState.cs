@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
-using UnityEngine;
+using UnityEditor;
 
 public class AttackEndState : State, IObserver
 {
@@ -9,10 +6,10 @@ public class AttackEndState : State, IObserver
 
     private StateMachine mainStateMachine;
 
-    //private MoveState moveState;
+    private MoveState moveState;
     private IdleState idleState;
 
-    public AttackEndState(StateMachine stateMachine, AIController aIController, 
+    public AttackEndState(StateMachine stateMachine, AIController aIController,
         StateSubject stateSubject) : base(stateMachine, aIController)
     {
         this.stateSubject = stateSubject;
@@ -39,13 +36,13 @@ public class AttackEndState : State, IObserver
     }
     public void AnimationAttackEndEvent()
     {
-        // IDLE 상태 이동
-        mainStateMachine.ChangeState(idleState);
+        // Move 상태 이동
+        mainStateMachine.ChangeState(moveState);
     }
 
     public void ObserverUpdate()
     {
-        //moveState = stateSubject.MoveState;
+        moveState = stateSubject.MoveState;
         idleState = stateSubject.IdleState;
         mainStateMachine = stateSubject.MainStateMachine;
     }

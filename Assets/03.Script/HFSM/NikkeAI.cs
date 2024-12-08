@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NikkeAI : AIController
 {
-    public AttackState AttackState { get; private set; } 
+    public AttackState AttackState { get; private set; }
     public MoveState MoveState { get; private set; }
     public IdleState IdleState { get; private set; }
 
@@ -35,7 +33,7 @@ public class NikkeAI : AIController
 
         AttackState = new AttackState(MainStateMachine, this, stateSubject);
         MoveState = new MoveState(MainStateMachine, this, stateSubject);
-        IdleState = new IdleState(MainStateMachine, this, stateSubject); 
+        IdleState = new IdleState(MainStateMachine, this, stateSubject);
 
         stateSubject.StateInit(AttackState, MoveState, IdleState);
 
@@ -43,14 +41,14 @@ public class NikkeAI : AIController
 
         MainStateMachine.Initialize(MoveState);
 
-        enemies.AddFirst(enemyTest1);
+        //enemies.AddFirst(enemyTest1);
     }
 
     private void Update()
     {
         MainStateMachine.Update();
 
-        if (Input.GetKeyUp(KeyCode.F1)) 
+        if (Input.GetKeyUp(KeyCode.F1))
         {
             CurrentAnimationState = Animation_State.NORMAL;
         }

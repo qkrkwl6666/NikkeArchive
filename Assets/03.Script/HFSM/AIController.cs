@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
-using static NikkeAI;
+using UnityEngine.AI;
 
 public abstract class AIController : MonoBehaviour
 {
@@ -10,17 +8,37 @@ public abstract class AIController : MonoBehaviour
 
     public Animation_State CurrentAnimationState { get; set; } = Animation_State.NORMAL;
 
-    private Dictionary<(string, Animation_State), string> animationCache = new ();
+    private Dictionary<(string, Animation_State), string> animationCache = new();
     public Creature TargetEnemy { get; private set; }
 
     public NikkeStats NikkeStats { get; private set; }
-    public LinkedList<Creature> enemies = new ();
+    public List<Creature> enemies;
+    public List<CoverObject> coverObjects;
+
+    public NavMeshAgent NavMeshAgent { get; private set; }
+
+    public Transform TargetPosition; // 테스트 용도
+    public float DetectMargin { get; private set; } = -2f;
 
     public Sub_State SubState { get; set; }
+
+    public CoverObject CoverObject { get; set; }
+
+    // BattleManager
+    private BattleManager battleManager;
+
 
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        battleManager = GameObject.FindWithTag("BattleManager").GetComponent<BattleManager>();
+
+        enemies = battleManager.Enemies;
+        coverObjects = battleManager.CoverObjects;
+
+        // NavMeshAgent 초기화
+        NavMeshAgent.speed = NikkeStats.MoveSpeed;
     }
 
     public void AnimationPlay(string name)
@@ -86,6 +104,32 @@ public abstract class AIController : MonoBehaviour
         return true;
     }
 
+    public bool CoverDetection()
+    {
+        float frevDistance = float.MaxValue;
+
+        foreach (var cover in coverObjects)
+        {
+            if (!cover.IsEmpty) continue;
+
+            float distance = Vector3.Distance(cover.transform.position, transform.position);
+
+            if (distance <= NikkeStats.CoverRange && distance < frevDistance)
+            {
+                frevDistance = distance;
+                CoverObject = cover;
+            }
+        }
+
+        Debug.Log(CoverObject);
+        
+        if(CoverObject == null) return false;
+
+        CoverObject.UseCover();
+
+        return true;
+    }
+
     public void RotateEnemy()
     {
         if (TargetEnemy == null) return;
@@ -114,7 +158,7 @@ public abstract class AIController : MonoBehaviour
             * Time.deltaTime);
     }
 
-    public virtual void MoveFront() 
+    public virtual void MoveFront()
     {
 
     }
@@ -126,12 +170,24 @@ public abstract class AIController : MonoBehaviour
 
     public bool HasAmmo()
     {
-        if(NikkeStats.CurrentAmmo > 0)
+        if (NikkeStats.CurrentAmmo > 0)
         {
             return true;
-        }   
-        
+        }
+
         return false;
+    }
+
+    public void SetAgentDestination(Vector3 pos)
+    {
+        NavMeshAgent.isStopped = false;
+        NavMeshAgent.SetDestination(pos);
+    }
+
+    public void StopAgent()
+    {
+        NavMeshAgent.isStopped = true;
+        NavMeshAgent.ResetPath();
     }
 
 }
@@ -156,4 +212,5 @@ public enum Sub_State
     // MOVE
     MOVE_ING,
     MOVE_END,
+    MOVE_COVER,
 }

@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SequenceNode : IBTNode
 {
@@ -13,12 +11,12 @@ public class SequenceNode : IBTNode
 
     public IBTNode.BTNodeState Execute()
     {
-        if (children == null || children.Count == 0) 
+        if (children == null || children.Count == 0)
             return IBTNode.BTNodeState.Failure;
 
-        foreach (var node in children) 
+        foreach (var node in children)
         {
-            switch(node.Execute())
+            switch (node.Execute())
             {
                 case IBTNode.BTNodeState.Success:
                     continue;

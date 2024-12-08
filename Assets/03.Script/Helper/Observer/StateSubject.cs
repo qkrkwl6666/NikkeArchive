@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class StateSubject : ISubject
 {
@@ -19,7 +17,8 @@ public class StateSubject : ISubject
 
     // MoveState
     public MoveState MoveState { get; private set; } // Main
-    public MoveIngState MoveIngState { get; private set; } // Sub
+    public MovingState MovingState { get; private set; } // Sub
+    public MoveCoverState MoveCoverState { get; private set; } // Sub
     public MoveEndState MoveEndState { get; private set; } // Sub
 
     // IdleState
@@ -35,8 +34,10 @@ public class StateSubject : ISubject
         this.AttackDelayState = attackState.AttackDelayState;
 
         this.MoveState = moveState;
-        this.MoveIngState = moveState.MoveIngState;
+        this.MovingState = moveState.MovingState;
         this.MoveEndState = moveState.MoveEndState;
+        this.MoveCoverState = moveState.MoveCoverState;
+
         this.IdleState = idleState;
 
         this.MainStateMachine = attackState.GetStateMachine();
@@ -49,7 +50,7 @@ public class StateSubject : ISubject
 
         observers.Add(observer);
     }
-            
+
     public void RemoveObserver(IObserver observer)
     {
         observers.Remove(observer);

@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Creature : MonoBehaviour
 {
-    public float Hp {  get; private set; }
-    
+    public float Hp { get; private set; }
+
 
     public void TakeDamage(float damage)
     {

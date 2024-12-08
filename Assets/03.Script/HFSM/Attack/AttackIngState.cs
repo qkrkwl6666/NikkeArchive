@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class AttackIngState : State, IObserver
 {
     StateSubject stateSubject;
 
     private AttackDelayState attackDelayState;
 
-    public AttackIngState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject) 
+    public AttackIngState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject)
         : base(stateMachine, aIController)
     {
         this.stateSubject = stateSubject;

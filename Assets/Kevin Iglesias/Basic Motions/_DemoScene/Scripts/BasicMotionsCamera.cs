@@ -15,7 +15,6 @@ support@keviniglesias.com
 =============================================================================================
 */
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ namespace KevinIglesias
         public Transform player; //ASSIGN HERE THE PLAYER TRANSFORM ROOT
         private BasicMotionsCharacterController bMCC; //REFERENCE TO MAIN SCRIPT
         private BoxCollider playerBoxCollider; //REFERENCE TO PLAYER BOX COLLIDER
-        
+
         [Header("[CAMERA PIVOT]")]
         public Transform cameraPositionsRoot; //ROOT OF ALL CAMERA POSSIBLE POSITIONS (CAMERA PIVOT)
         private List<Transform> cameraPositions; //LIST TO STORE CAMERA POSITION TRANSFORMS
@@ -45,32 +44,32 @@ namespace KevinIglesias
         public float zoomCooldown = 0.1f; //AMOUNT OF TIME BEFORE ALLOWING TO ZOOM AGAIN
         public float zoomTimer = 0f; //TIMER TO TRACK WHEN ZOOM COOLDOWN IS COMPLETE
         private float scrollInput = 0f; //FOR TRACKING MOUSE WHEEL SCROLL INPUT
-        
+
         //TO AVOID CEILING OR WALLS SUDDENLY DISAPPEAR WHEN CAMERA OBSTACLE IS DETECTED
-        private float invisibleSurfaceMarginFix = 0.05f; 
+        private float invisibleSurfaceMarginFix = 0.05f;
 
         ///INITIALIZE VARIABLES
         void Awake()
         {
             //INITIALIZE CAMERA POSITIONS FROM PIVOT (cameraPositionsRoot)
             cameraPositions = new List<Transform>();
-            for(int i = 0; i < cameraPositionsRoot.childCount-1; i++)
+            for (int i = 0; i < cameraPositionsRoot.childCount - 1; i++)
             {
                 cameraPositions.Add(cameraPositionsRoot.GetChild(i));
             }
 
             //SET MAXIMUM ZOOM VALUE BASED ON THE NUMBER OF CAMERA POSITIONS (EXCLUDING THE LAST ONE THAT IS THE CAMERA)
-            maxZoomLevel = cameraPositionsRoot.childCount-2;
-            
+            maxZoomLevel = cameraPositionsRoot.childCount - 2;
+
             //INITIALIZE THE ZOOM TIMER WITH THE COOLDOWN VALUE
             zoomTimer = zoomCooldown;
-            
+
             //GET THE MAIN SCRIPT FROM THE PLAYER TRANSFORM
             bMCC = player.GetComponent<BasicMotionsCharacterController>();
-            
+
             //GET THE PLAYER BOX COLLIDER
             playerBoxCollider = bMCC.collisionBox;
-            
+
         }
 
         ///DETECT PLAYER INPUTS AND MOVE CAMERA
@@ -78,30 +77,30 @@ namespace KevinIglesias
         {
             //GET INPUTS
             GetInputs();
-            
+
             //MOVE CAMERA
             ControlCamera();
         }
-        
+
         ///INPUTS ARE READ DIRECTLY FROM MOUSE (TO AVOID CONFLICTS WITH CURRENT PROJECT INPUT CONFIGURATION)
         private void GetInputs()
         {
             //INPUT FOR TILTING THE CAMERA (LOOK UP OR LOOK DOWN)
             tiltInput = 0.0f;
-            if(Input.GetKey(KeyCode.R))
+            if (Input.GetKey(KeyCode.R))
             {
                 tiltInput = 1.0f;
             }
 
-            if(Input.GetKey(KeyCode.F))
+            if (Input.GetKey(KeyCode.F))
             {
                 tiltInput = -1.0f;
             }
-            
+
             //GET THE SCROLL INPUT FROM THE MOUSE
             scrollInput = -Input.mouseScrollDelta.y;
         }
-        
+
         ///MOVE CAMERA BASED ON INPUTS
         private void ControlCamera()
         {
@@ -109,7 +108,7 @@ namespace KevinIglesias
             //GET THE CURRENT ROTATION OF THE CAMERA ROOT IN LOCAL EULER ANGLES (X, Y, Z)
             Vector3 currentRotation = cameraPositionsRoot.localEulerAngles;
             //ADJUST THE X ROTATION IF IT'S GREATER THAN 180 (TO KEEP THE RANGE BETWEEN -180 AND 180 DEGREES)
-            if(currentRotation.x > 180)
+            if (currentRotation.x > 180)
             {
                 currentRotation.x -= 360;
             }
@@ -122,33 +121,36 @@ namespace KevinIglesias
 
             ///ZOOM
             //IF THE ZOOM TIMER HAS EXCEEDED THE COOLDOWN VALUE, ALLOW ZOOMING
-            if(zoomTimer >= zoomCooldown)
+            if (zoomTimer >= zoomCooldown)
             {
                 //IF THE USER SCROLLS UP, INCREASE THE zoomValue
-                if(scrollInput > 0)
+                if (scrollInput > 0)
                 {
                     zoomLevel++;
                     zoomTimer = 0f;
-                }else if(scrollInput < 0) //IF THE USER SCROLLS DOWN, DECREASE THE zoomValue
+                }
+                else if (scrollInput < 0) //IF THE USER SCROLLS DOWN, DECREASE THE zoomValue
                 {
                     zoomLevel--;
                     zoomTimer = 0f;
                 }
-                
+
                 //CLAMP THE zoomLevel TO ENSURE IT STAYS BETWEEN 0 AND maxZoomLevel
                 zoomLevel = Mathf.Clamp(zoomLevel, 0, maxZoomLevel);
-                
+
                 //THIS COULD BE SMOOTHER BUT THEN IT JITTERS WITH THE INVISIBLE CEILING/WALL FIX APPLIED LATER (invisibleSurfaceMarginFix)
-                transform.localPosition = cameraPositions[zoomLevel].localPosition; 
-                
-            }else{
+                transform.localPosition = cameraPositions[zoomLevel].localPosition;
+
+            }
+            else
+            {
                 //IF THE COOLDOWN IS NOT COMPLETE, INCREMENT THE TIMER
-                if(zoomTimer < zoomCooldown)
+                if (zoomTimer < zoomCooldown)
                 {
                     zoomTimer += Time.deltaTime;
                 }
             }
-            
+
             ///OBSTACLE DETECTION
             //CHECK IF THERE ARE ANY WALLS BETWEEN CAMERA AND CHARACTER AND MOVE CAMERA IN FRONT OF WALL IF ANY
             Vector3 boxColliderCenter = player.transform.position + playerBoxCollider.center;
@@ -156,23 +158,23 @@ namespace KevinIglesias
             float distance = Vector3.Distance(boxColliderCenter, transform.position);
             RaycastHit[] raycastHits = Physics.RaycastAll(boxColliderCenter, cameraRayDirection, distance);
             RaycastHit? closestHit = null; //NULLABLE RaycastHit
-            foreach(RaycastHit hit in raycastHits)
+            foreach (RaycastHit hit in raycastHits)
             {
                 //ONLY USE COLLIDERS THAT ARE CHILDREN OF collisionsRoot TRANSFORM
-                if(hit.transform.parent == bMCC.collisionsRoot)
+                if (hit.transform.parent == bMCC.collisionsRoot)
                 {
                     //CHECK CLOSEST WALL TO CHARACTER IF MULTIPLE WALLS DETECTED
-                    if(closestHit == null || hit.distance < closestHit.Value.distance) 
+                    if (closestHit == null || hit.distance < closestHit.Value.distance)
                     {
                         closestHit = hit;
                     }
                 }
             }
 
-            if(closestHit != null) //OBSTACLE DETECTED
+            if (closestHit != null) //OBSTACLE DETECTED
             {
                 //PLACE CAMERA IN FRONT OF WALL (WITH A MARGIN OF 0.05f TO AVOID INVISIBLE CEILING OR WALL)
-                transform.position = closestHit.Value.point + (cameraRayDirection * -invisibleSurfaceMarginFix); 
+                transform.position = closestHit.Value.point + (cameraRayDirection * -invisibleSurfaceMarginFix);
             }
         }
     }

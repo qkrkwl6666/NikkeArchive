@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SelectorNode : IBTNode
 {
@@ -16,9 +14,9 @@ public class SelectorNode : IBTNode
         if (children == null || children.Count == 0)
             return IBTNode.BTNodeState.Failure;
 
-        foreach (var node in children) 
+        foreach (var node in children)
         {
-            switch (node.Execute()) 
+            switch (node.Execute())
             {
                 case IBTNode.BTNodeState.Success:
                     return IBTNode.BTNodeState.Success;

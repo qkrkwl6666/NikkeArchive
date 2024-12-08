@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FormationFickUp : MonoBehaviour
@@ -12,7 +9,7 @@ public class FormationFickUp : MonoBehaviour
 
     private void Update()
     {
-        if(isPickUp)
+        if (isPickUp)
         {
             Vector3 mousePosition = Input.mousePosition;
 
@@ -24,7 +21,7 @@ public class FormationFickUp : MonoBehaviour
             formationAnimationTest.transform.position = pos;
         }
 
-        if (Input.GetMouseButtonUp(0) && isPickUp) 
+        if (Input.GetMouseButtonUp(0) && isPickUp)
         {
             Debug.Log("IsPickUpDown");
             isPickUp = false;

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +5,7 @@ public class AnimationTest : MonoBehaviour
 {
     private Animator animator;
     private RuntimeAnimatorController runtimeAnimator;
-    private List<AnimationClip> animatorClips = new ();
+    private List<AnimationClip> animatorClips = new();
 
     private float duration = 5f;
     private float time = 5f;
@@ -18,27 +17,27 @@ public class AnimationTest : MonoBehaviour
 
         runtimeAnimator = animator.runtimeAnimatorController;
 
-        foreach(AnimationClip clip in runtimeAnimator.animationClips)
+        foreach (AnimationClip clip in runtimeAnimator.animationClips)
         {
             animatorClips.Add(clip);
         }
-        
+
     }
 
     private void Update()
     {
         time += Time.deltaTime;
 
-        if (time >= duration) 
+        if (time >= duration)
         {
             time = 0;
-          
+
             animator.Play(animatorClips[index].name);
             Debug.Log($"Change {animatorClips[index].name}");
 
             index++;
 
-            if(index >= animatorClips.Count)
+            if (index >= animatorClips.Count)
             {
                 index = 0;
             }

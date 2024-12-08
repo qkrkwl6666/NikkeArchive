@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-
 public class MoveEndState : State, IObserver
 {
     private StateSubject stateSubject;
-    
-    private AttackState attackState; 
-    private MoveState moveState; 
 
-    private MoveIngState moveIngState; 
+    private AttackState attackState;
+    private MoveState moveState;
 
-    public MoveEndState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject) : base(stateMachine, aIController)
+    private MovingState movingState;
+
+    public MoveEndState(StateMachine stateMachine, AIController aIController
+        , StateSubject stateSubject) : base(stateMachine, aIController)
     {
         this.stateSubject = stateSubject;
 
@@ -27,7 +23,7 @@ public class MoveEndState : State, IObserver
 
     public override void Exit()
     {
-        
+
     }
 
     public override void Execute()
@@ -39,7 +35,7 @@ public class MoveEndState : State, IObserver
     {
         attackState = stateSubject.AttackState;
         moveState = stateSubject.MoveState;
-        moveIngState = stateSubject.MoveIngState;
+        movingState = stateSubject.MovingState;
     }
 
     public void AnimationEventMoveEnd()
