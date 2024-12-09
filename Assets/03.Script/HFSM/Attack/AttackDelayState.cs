@@ -55,8 +55,13 @@ public class AttackDelayState : State, IObserver
         if (!controller.EnemyDetection())
         {
             // 적 없으면 attackEndState 이동
-            mainStateMachine.ChangeState(attackEndState);
+            stateMachine.ChangeState(attackEndState);
+            return;
+        }
 
+        if (controller.CoverObject == null && controller.CoverDetection()) 
+        {
+            mainStateMachine.ChangeState(moveState);
             return;
         }
 

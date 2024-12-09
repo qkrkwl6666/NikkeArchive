@@ -137,8 +137,6 @@ public abstract class AIController : MonoBehaviour
                 CoverObject = cover;
             }
         }
-
-        Debug.Log(CoverObject);
         
         if(CoverObject == null) return false;
 
