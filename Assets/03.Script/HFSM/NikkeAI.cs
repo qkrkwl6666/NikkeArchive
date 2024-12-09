@@ -61,6 +61,8 @@ public class NikkeAI : AIController
             CurrentAnimationState = Animation_State.KNEEL;
         }
 
+        Debug.Log($"Cover Distance : {Vector3.Distance(transform.position, coverObjects[0].transform.position)}");
+
     }
 
     public override void MoveFront()

@@ -56,7 +56,6 @@ public abstract class AIController : MonoBehaviour
         }
 
         animator.SetTrigger(fullName);
-        //animator.Play(fullName);
     }
 
     private bool AnimationStringException(string name)
@@ -104,6 +103,24 @@ public abstract class AIController : MonoBehaviour
         return true;
     }
 
+    public bool CoverEnemyDetection(Transform pos)
+    {
+        float frevDistance = float.MaxValue;
+
+        foreach (var enemy in enemies)
+        {
+            float distance = Vector3.Distance(enemy.transform.position, pos.position);
+
+            if (distance <= NikkeStats.AttackRange + DetectMargin && distance < frevDistance)
+            {
+                frevDistance = distance;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public bool CoverDetection()
     {
         float frevDistance = float.MaxValue;
@@ -113,8 +130,8 @@ public abstract class AIController : MonoBehaviour
             if (!cover.IsEmpty) continue;
 
             float distance = Vector3.Distance(cover.transform.position, transform.position);
-
-            if (distance <= NikkeStats.CoverRange && distance < frevDistance)
+            if (distance <= NikkeStats.CoverRange && distance < frevDistance 
+                && CoverEnemyDetection(cover.transform))
             {
                 frevDistance = distance;
                 CoverObject = cover;
