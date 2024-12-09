@@ -45,7 +45,7 @@ public abstract class AIController : MonoBehaviour
     {
         if (AnimationStringException(name))
         {
-            animator.Play(name);
+            animator.SetTrigger(name);
             return;
         }
 

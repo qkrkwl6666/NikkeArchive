@@ -7,7 +7,7 @@ public class AttackReloadState : State, IObserver
     private MoveState moveState; // Main
     private IdleState idleState; // Main
     private AttackStartState attackStartState; // Sub
-    private AttackDelayState attackDelayState;
+    private AttackDelayState attackDelayState; // Sub
 
     public AttackReloadState(StateMachine stateMachine, AIController aIController,
         StateSubject stateSubject) : base(stateMachine, aIController)
@@ -37,7 +37,7 @@ public class AttackReloadState : State, IObserver
 
         if (!controller.EnemyDetection())
         {
-            mainStateMachine.ChangeState(attackDelayState);
+            mainStateMachine.ChangeState(moveState);
             return;
         }
 
