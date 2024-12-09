@@ -1282,6 +1282,7 @@ MonoBehaviour:
   subStateText: {fileID: 197760528}
   targetEnemyText: {fileID: 102429472}
   nikkeAi1: {fileID: 342371935}
+  coverObject: {fileID: 1485013066}
 --- !u!1 &1357313336
 GameObject:
   m_ObjectHideFlags: 0

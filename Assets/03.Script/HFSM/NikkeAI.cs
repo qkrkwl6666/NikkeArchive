@@ -63,13 +63,6 @@ public class NikkeAI : AIController
 
     }
 
-    public override void MoveFront()
-    {
-        // TODO : 나중에 내비매쉬 생각해서 뭐가 더 좋은지 
-
-        transform.Translate(Vector3.forward * NikkeStats.MoveSpeed * Time.deltaTime);
-    }
-
     #region 애니메이션 이벤트
     public void AnimationAttackStartEvent()
     {

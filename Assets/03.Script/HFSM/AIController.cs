@@ -140,7 +140,7 @@ public abstract class AIController : MonoBehaviour
         
         if(CoverObject == null) return false;
 
-        CoverObject.UseCover();
+        CoverObject.UseCover(this);
 
         return true;
     }
@@ -173,11 +173,6 @@ public abstract class AIController : MonoBehaviour
             * Time.deltaTime);
     }
 
-    public virtual void MoveFront()
-    {
-
-    }
-
     public void SetNikkeData(NikkeStats nikkeStats)
     {
         NikkeStats = nikkeStats;
@@ -205,6 +200,12 @@ public abstract class AIController : MonoBehaviour
         NavMeshAgent.ResetPath();
     }
 
+    // CoverDestory 호출 메서드
+    public void CoverDestory()
+    {
+        CoverObject = null;
+        CurrentAnimationState = Animation_State.NORMAL;
+    }
 }
 
 public enum Animation_State

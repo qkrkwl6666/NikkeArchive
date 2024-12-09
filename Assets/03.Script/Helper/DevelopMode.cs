@@ -8,12 +8,18 @@ public class DevelopMode : MonoBehaviour
     public TextMeshProUGUI targetEnemyText;
 
     public NikkeAI nikkeAi1;
+    public CoverObject coverObject;
 
     public void Update()
     {
         mainStateText.text = $"{nikkeAi1?.MainStateMachine?.CurrentState}";
         subStateText.text = $"{nikkeAi1.SubState}";
         targetEnemyText.text = $"{nikkeAi1.TargetEnemy}";
+
+        if(Input.GetKeyDown(KeyCode.F5) && coverObject != null)
+        {
+            coverObject.CoverDestory();
+        }
     }
 
     //static public string GetSubStateString(Sub_State state)

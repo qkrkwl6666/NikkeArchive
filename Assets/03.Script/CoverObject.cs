@@ -9,10 +9,13 @@ public class CoverObject : MonoBehaviour
 
     public CoverType CoverType { get; private set; } = CoverType.Kneel;
 
-    public bool UseCover() 
+    private AIController controller;
+
+    public bool UseCover(AIController controller) 
     {
         if (!IsEmpty) return false;
 
+        this.controller = controller;
         IsEmpty = false;
 
         return true;
@@ -21,7 +24,16 @@ public class CoverObject : MonoBehaviour
     public void UnCover()
     {
         IsEmpty = true;
+        controller = null;
     }
+
+    public void CoverDestory()
+    {
+        // controller.CoverObject = null
+        // controller 애니메이션 Normal 로 변경
+        controller.CoverDestory();
+        Destroy(gameObject); // 임시로 파괴
+    }    
 
 
 }
