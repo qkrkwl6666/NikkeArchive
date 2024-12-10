@@ -1,8 +1,8 @@
-public class MoveState : State, IObserver
+public class MoveState : MainState, IObserver
 {
     private StateSubject stateSubject;
 
-    public StateMachine SubStateMachine { get; private set; }
+    public SubStateMachine SubStateMachine { get; private set; }
 
     // Move State
     public MovingState MovingState { get; private set; }
@@ -12,17 +12,17 @@ public class MoveState : State, IObserver
     // Attack State
     private AttackState attackState;
 
-    public MoveState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject)
-        : base(stateMachine, aIController)
+    public MoveState(MainStateMachine mainStateMachine, AIController aIController,
+        StateSubject stateSubject) : base(mainStateMachine, aIController)
     {
         this.stateSubject = stateSubject;
         stateSubject.RegisterObserver(this);
 
-        SubStateMachine = new StateMachine();
+        SubStateMachine = new SubStateMachine();
 
-        MovingState = new MovingState(stateMachine, aIController, stateSubject);
-        MoveEndState = new MoveEndState(stateMachine, aIController, stateSubject);
-        MoveCoverState = new MoveCoverState(stateMachine, aIController, stateSubject);
+        MovingState = new MovingState(SubStateMachine, aIController, stateSubject);
+        MoveEndState = new MoveEndState(SubStateMachine, aIController, stateSubject);
+        MoveCoverState = new MoveCoverState(SubStateMachine, aIController, stateSubject);
     }
 
     public override void Enter()
@@ -50,9 +50,9 @@ public class MoveState : State, IObserver
 
 
     }
-    public void ChangeMainState(State state)
+    public void ChangeMainState(MainState mainState)
     {
-        stateMachine.ChangeState(state);
+        mainStateMachine.ChangeState(mainState);
     }
 
     public void ObserverUpdate()

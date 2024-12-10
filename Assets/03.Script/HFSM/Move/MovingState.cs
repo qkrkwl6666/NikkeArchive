@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovingState : State, IObserver
+public class MovingState : SubState, IObserver
 {
     private StateSubject stateSubject;
 
@@ -15,8 +15,8 @@ public class MovingState : State, IObserver
     private float time = 0f;
     private float enemyDetectTime = 0.1f;
 
-    public MovingState(StateMachine stateMachine, AIController aIController,
-        StateSubject stateSubject) : base(stateMachine, aIController)
+    public MovingState(SubStateMachine subStateMachine, AIController aIController,
+        StateSubject stateSubject) : base(subStateMachine, aIController)
     {
         this.stateSubject = stateSubject;
         stateSubject.RegisterObserver(this);
@@ -61,12 +61,12 @@ public class MovingState : State, IObserver
         if(controller.CoverDetection())
         {
             Debug.Log("moveCoverState");
-            stateMachine.ChangeState(moveCoverState);
+            subStateMachine.ChangeState(moveCoverState);
             return;
         }
 
         Debug.Log("moveEndState");
-        stateMachine.ChangeState(moveEndState);   
+        subStateMachine.ChangeState(moveEndState);   
     }
 
 

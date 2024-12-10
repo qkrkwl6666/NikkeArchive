@@ -5,7 +5,7 @@ public class StateSubject : ISubject
     private List<IObserver> observers = new List<IObserver>();
 
     // MainStateMachine
-    public StateMachine MainStateMachine { get; private set; }
+    public MainStateMachine MainStateMachine { get; private set; }
 
     // AttackState
     public AttackState AttackState { get; private set; } // Main

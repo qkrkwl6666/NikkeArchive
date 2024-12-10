@@ -1,10 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface SubState
+public class SubState : IState
 {
-    public void Enter();
-    public void Execute();
-    public void Exit();
+    protected SubStateMachine subStateMachine;
+    protected AIController controller;
+    protected SubState(SubStateMachine subStateMachine, AIController aIController)
+    {
+        this.subStateMachine = subStateMachine;
+        this.controller = aIController;
+    }
+
+    public virtual void Enter() { }
+    public virtual void Execute() { }
+    public virtual void Exit() { }
 }

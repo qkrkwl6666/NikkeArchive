@@ -6,7 +6,7 @@ public class NikkeAI : AIController
     public MoveState MoveState { get; private set; }
     public IdleState IdleState { get; private set; }
 
-    public StateMachine MainStateMachine { get; private set; } // MainState
+    public MainStateMachine MainStateMachine { get; private set; } // MainState
 
     // Å×½ºÆ® 
     public Creature enemyTest1;
@@ -29,7 +29,7 @@ public class NikkeAI : AIController
 
         stateSubject = new StateSubject();
 
-        MainStateMachine = new StateMachine();
+        MainStateMachine = new MainStateMachine();
 
         AttackState = new AttackState(MainStateMachine, this, stateSubject);
         MoveState = new MoveState(MainStateMachine, this, stateSubject);

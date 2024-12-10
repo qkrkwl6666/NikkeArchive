@@ -1,10 +1,8 @@
-using System.Diagnostics;
-
-public class AttackState : State, IObserver
+public class AttackState : MainState, IObserver
 {
     private StateSubject stateSubject;
 
-    public StateMachine SubStateMachine { get; private set; }
+    public SubStateMachine SubStateMachine { get; private set; }
 
     public AttackStartState AttackStartState { get; private set; }
     public AttackIngState AttackIngState { get; private set; }
@@ -18,14 +16,14 @@ public class AttackState : State, IObserver
     public Attack_State CurrentAttackState { get; set; } = Attack_State.ATTACK_START;
 
 
-    public AttackState(StateMachine stateMachine, AIController controller, StateSubject stateSubject)
-        : base(stateMachine, controller)
+    public AttackState(MainStateMachine mainStateMachine, AIController controller, StateSubject stateSubject)
+        : base(mainStateMachine, controller)
     {
         this.stateSubject = stateSubject;
 
         stateSubject.RegisterObserver(this);
 
-        SubStateMachine = new StateMachine();
+        SubStateMachine = new SubStateMachine();
 
         AttackStartState = new AttackStartState(SubStateMachine, controller, stateSubject);
         AttackIngState = new AttackIngState(SubStateMachine, controller, stateSubject);
@@ -39,7 +37,7 @@ public class AttackState : State, IObserver
         if (!controller.EnemyDetection())
         {
             UnityEngine.Debug.Log("AttackState Enter !controller.EnemyDetection()");
-            stateMachine.ChangeState(moveState);
+            mainStateMachine.ChangeState(moveState);
             return;
         }
 

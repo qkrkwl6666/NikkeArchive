@@ -1,11 +1,11 @@
-public class AttackIngState : State, IObserver
+public class AttackIngState : SubState, IObserver
 {
     StateSubject stateSubject;
 
     private AttackDelayState attackDelayState;
 
-    public AttackIngState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject)
-        : base(stateMachine, aIController)
+    public AttackIngState(SubStateMachine subStateMachine, AIController aIController, StateSubject stateSubject)
+        : base(subStateMachine, aIController)
     {
         this.stateSubject = stateSubject;
         stateSubject.RegisterObserver(this);
@@ -38,7 +38,7 @@ public class AttackIngState : State, IObserver
 
     public void AnimationEventAttackIngEnd()
     {
-        stateMachine.ChangeState(attackDelayState);
+        subStateMachine.ChangeState(attackDelayState);
     }
 
     public void ObserverUpdate()

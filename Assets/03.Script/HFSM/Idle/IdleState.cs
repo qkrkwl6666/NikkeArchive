@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class IdleState : State, IObserver
+public class IdleState : MainState, IObserver
 {
     private StateSubject stateSubject;
-    private StateMachine mainStateMachine; // Main
+    //private StateMachine mainStateMachine; // Main
 
     private AttackState attackState;
     private MoveState moveState;
@@ -11,8 +11,8 @@ public class IdleState : State, IObserver
     private float time;
     private float idleDuration = 2f;
 
-    public IdleState(StateMachine stateMachine, AIController aIController,
-        StateSubject stateSubject) : base(stateMachine, aIController)
+    public IdleState(MainStateMachine mainStateMachine, AIController aIController,
+        StateSubject stateSubject) : base(mainStateMachine, aIController)
     {
         this.stateSubject = stateSubject;
 

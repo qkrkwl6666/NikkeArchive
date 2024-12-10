@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
 namespace UnityChan
 {
-	public class CopyMaterialParameter : EditorWindow
+    public class CopyMaterialParameter : EditorWindow
 	{
 		[SerializeField]
 		static Material source;

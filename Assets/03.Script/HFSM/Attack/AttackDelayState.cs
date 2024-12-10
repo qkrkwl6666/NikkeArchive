@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackDelayState : State, IObserver
+public class AttackDelayState : SubState, IObserver
 {
     private StateSubject stateSubject;
 
@@ -11,12 +11,12 @@ public class AttackDelayState : State, IObserver
     private float time = 0f;
 
     // Main State Machine
-    private StateMachine mainStateMachine;
+    private MainStateMachine mainStateMachine;
     // Move State
     private MoveState moveState;
 
-    public AttackDelayState(StateMachine stateMachine, AIController aIController, StateSubject stateSubject)
-        : base(stateMachine, aIController)
+    public AttackDelayState(SubStateMachine subStateMachine, AIController aIController, 
+        StateSubject stateSubject): base(subStateMachine, aIController)
     {
         this.stateSubject = stateSubject;
 
@@ -55,7 +55,7 @@ public class AttackDelayState : State, IObserver
         if (!controller.EnemyDetection())
         {
             // 적 없으면 attackEndState 이동
-            stateMachine.ChangeState(attackEndState);
+            subStateMachine.ChangeState(attackEndState);
             return;
         }
 
@@ -65,8 +65,8 @@ public class AttackDelayState : State, IObserver
             return;
         }
 
-        State state = controller.HasAmmo() ? attackIngState : attackReloadState;
-        stateMachine.ChangeState(state);
+        SubState state = controller.HasAmmo() ? attackIngState : attackReloadState;
+        subStateMachine.ChangeState(state);
     }
 
     public void ObserverUpdate()

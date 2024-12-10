@@ -1,16 +1,14 @@
-using UnityEditor;
-
-public class AttackEndState : State, IObserver
+public class AttackEndState : SubState, IObserver
 {
     private StateSubject stateSubject;
 
-    private StateMachine mainStateMachine;
+    private MainStateMachine mainStateMachine;
 
     private MoveState moveState;
     private IdleState idleState;
 
-    public AttackEndState(StateMachine stateMachine, AIController aIController,
-        StateSubject stateSubject) : base(stateMachine, aIController)
+    public AttackEndState(SubStateMachine subStateMachine, AIController aIController,
+        StateSubject stateSubject) : base(subStateMachine, aIController)
     {
         this.stateSubject = stateSubject;
 

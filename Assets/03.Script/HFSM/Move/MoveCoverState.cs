@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MoveCoverState : State, IObserver
+public class MoveCoverState : SubState, IObserver
 {
     private StateSubject stateSubject;
 
     private MoveEndState moveEndState;
     private MovingState movingState;
 
-    public MoveCoverState(StateMachine stateMachine, AIController aIController, 
-        StateSubject stateSubject) : base(stateMachine, aIController)
+    public MoveCoverState(SubStateMachine subStateMachine, AIController aIController, 
+        StateSubject stateSubject) : base(subStateMachine, aIController)
     {
         this.stateSubject = stateSubject;
         stateSubject.RegisterObserver(this);
@@ -37,7 +33,7 @@ public class MoveCoverState : State, IObserver
     {
         if(controller.CoverObject == null)
         {
-            stateMachine.ChangeState(movingState);
+            subStateMachine.ChangeState(movingState);
         }
 
         IsDestinationReached();
@@ -56,7 +52,7 @@ public class MoveCoverState : State, IObserver
         {
             if(!controller.NavMeshAgent.hasPath || controller.NavMeshAgent.velocity.sqrMagnitude == 0f)
             {
-                stateMachine.ChangeState(moveEndState);
+                subStateMachine.ChangeState(moveEndState);
             }
         }
     }

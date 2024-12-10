@@ -1,14 +1,13 @@
-public class StateMachine
+public class SubStateMachine
 {
-    public State CurrentState { get; private set; }
+    public SubState CurrentState { get; private set; }
 
-
-    public void Initialize(State state)
+    public void Initialize(SubState state)
     {
         CurrentState = state;
         CurrentState?.Enter();
     }
-    public void ChangeState(State state)
+    public void ChangeState(SubState state)
     {
         CurrentState?.Exit();
         CurrentState = state;

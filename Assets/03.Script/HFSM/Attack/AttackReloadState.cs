@@ -1,16 +1,16 @@
-public class AttackReloadState : State, IObserver
+public class AttackReloadState : SubState, IObserver
 {
     private StateSubject stateSubject;
 
-    private StateMachine mainStateMachine;
+    private MainStateMachine mainStateMachine;
 
     private MoveState moveState; // Main
     private IdleState idleState; // Main
     private AttackStartState attackStartState; // Sub
     private AttackDelayState attackDelayState; // Sub
 
-    public AttackReloadState(StateMachine stateMachine, AIController aIController,
-        StateSubject stateSubject) : base(stateMachine, aIController)
+    public AttackReloadState(SubStateMachine subStateMachine, AIController aIController,
+        StateSubject stateSubject) : base(subStateMachine, aIController)
     {
         this.stateSubject = stateSubject;
         stateSubject.RegisterObserver(this);
@@ -41,7 +41,7 @@ public class AttackReloadState : State, IObserver
             return;
         }
 
-        stateMachine.ChangeState(attackStartState);
+        subStateMachine.ChangeState(attackStartState);
     }
 
     public void ObserverUpdate()

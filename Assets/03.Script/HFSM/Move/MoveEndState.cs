@@ -1,4 +1,4 @@
-public class MoveEndState : State, IObserver
+public class MoveEndState : SubState, IObserver
 {
     private StateSubject stateSubject;
 
@@ -7,8 +7,8 @@ public class MoveEndState : State, IObserver
 
     private MovingState movingState;
 
-    public MoveEndState(StateMachine stateMachine, AIController aIController
-        , StateSubject stateSubject) : base(stateMachine, aIController)
+    public MoveEndState(SubStateMachine subStateMachine, AIController aIController
+        , StateSubject stateSubject) : base(subStateMachine, aIController)
     {
         this.stateSubject = stateSubject;
 
