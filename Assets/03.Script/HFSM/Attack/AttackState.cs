@@ -2,8 +2,6 @@ public class AttackState : MainState, IObserver
 {
     private StateSubject stateSubject;
 
-    public SubStateMachine SubStateMachine { get; private set; }
-
     public AttackStartState AttackStartState { get; private set; }
     public AttackIngState AttackIngState { get; private set; }
     public AttackDelayState AttackDelayState { get; private set; }
@@ -12,6 +10,7 @@ public class AttackState : MainState, IObserver
 
     // Move
     private MoveState moveState;
+    private MovingState movingState;
 
     public Attack_State CurrentAttackState { get; set; } = Attack_State.ATTACK_START;
 
@@ -22,8 +21,6 @@ public class AttackState : MainState, IObserver
         this.stateSubject = stateSubject;
 
         stateSubject.RegisterObserver(this);
-
-        SubStateMachine = new SubStateMachine();
 
         AttackStartState = new AttackStartState(SubStateMachine, controller, stateSubject);
         AttackIngState = new AttackIngState(SubStateMachine, controller, stateSubject);
@@ -36,8 +33,7 @@ public class AttackState : MainState, IObserver
     {
         if (!controller.EnemyDetection())
         {
-            UnityEngine.Debug.Log("AttackState Enter !controller.EnemyDetection()");
-            mainStateMachine.ChangeState(moveState);
+            mainStateMachine.ChangeState(moveState, movingState);
             return;
         }
 
@@ -75,6 +71,12 @@ public class AttackState : MainState, IObserver
         SubStateMachine.Update();
     }
 
+    public void ObserverUpdate()
+    {
+        moveState = stateSubject.MoveState;
+        movingState = stateSubject.MovingState;
+    }
+
 
     #region 애니메이션 이벤트
     public void AnimationAttackStartEvent()
@@ -93,11 +95,6 @@ public class AttackState : MainState, IObserver
     public void AnimationAttackEndEvent()
     {
         AttackEndState.AnimationAttackEndEvent();
-    }
-
-    public void ObserverUpdate()
-    {
-        moveState = stateSubject.MoveState;
     }
 
     #endregion

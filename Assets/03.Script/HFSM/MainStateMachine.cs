@@ -2,16 +2,22 @@ public class MainStateMachine
 {
     public MainState CurrentState { get; private set; }
 
-    public void Initialize(MainState state)
+    public void Initialize(MainState mainState, SubState subState)
     {
-        CurrentState = state;
+        CurrentState = mainState;
         CurrentState?.Enter();
+
+        CurrentState?.SubStateMachine.Initialize(subState);
     }
-    public void ChangeState(MainState state)
+    public void ChangeState(MainState mainState, SubState subState = null)
     {
+
         CurrentState?.Exit();
-        CurrentState = state;
+        CurrentState = mainState;
         CurrentState?.Enter();
+
+        if(subState != null) 
+            mainState?.SubStateMachine?.ChangeState(subState);
     }
 
     public void CurrentStateExit()

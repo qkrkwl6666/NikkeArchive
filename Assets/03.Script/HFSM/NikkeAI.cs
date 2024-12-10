@@ -39,7 +39,7 @@ public class NikkeAI : AIController
 
         stateSubject.NotifyObserver();
 
-        MainStateMachine.Initialize(MoveState);
+        MainStateMachine.Initialize(MoveState, MoveState.MovingState);
 
         //enemies.AddFirst(enemyTest1);
     }
@@ -86,6 +86,11 @@ public class NikkeAI : AIController
     public void AnimationMoveEndEvent()
     {
         MoveState.AnimationMoveEndEvent();
+    }
+
+    public void AnimationMoveJumpEvent()
+    {
+        MoveState.AnimationMoveJumpEvent();
     }
 
     #endregion

@@ -14,6 +14,7 @@ public class AttackDelayState : SubState, IObserver
     private MainStateMachine mainStateMachine;
     // Move State
     private MoveState moveState;
+    private MoveCoverState moveCoverState;
 
     public AttackDelayState(SubStateMachine subStateMachine, AIController aIController, 
         StateSubject stateSubject): base(subStateMachine, aIController)
@@ -61,7 +62,8 @@ public class AttackDelayState : SubState, IObserver
 
         if (controller.CoverObject == null && controller.CoverDetection()) 
         {
-            mainStateMachine.ChangeState(moveState);
+            mainStateMachine.ChangeState(moveState, moveCoverState);
+            //moveState.SubStateMachine.Initialize(MoveCoverState)
             return;
         }
 
@@ -76,5 +78,6 @@ public class AttackDelayState : SubState, IObserver
         attackReloadState = stateSubject.AttackReloadState;
         mainStateMachine = stateSubject.MainStateMachine;
         moveState = stateSubject.MoveState;
+        moveCoverState = stateSubject.MoveCoverState;
     }
 }

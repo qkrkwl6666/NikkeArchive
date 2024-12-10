@@ -28,6 +28,10 @@ public class MovingState : SubState, IObserver
         time = 0f;
         controller.CurrentAnimationState = Animation_State.NORMAL;
         controller.SetAgentDestination(controller.TargetPosition.position);
+
+        AnimatorStateInfo stateInfo = controller.Animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName(AnimationStrings.MOVE_ING)) return;
+        controller.AnimationPlay(AnimationStrings.MOVE_ING);
     }
 
     public override void Exit()
@@ -60,12 +64,10 @@ public class MovingState : SubState, IObserver
     {
         if(controller.CoverDetection())
         {
-            Debug.Log("moveCoverState");
             subStateMachine.ChangeState(moveCoverState);
             return;
         }
 
-        Debug.Log("moveEndState");
         subStateMachine.ChangeState(moveEndState);   
     }
 

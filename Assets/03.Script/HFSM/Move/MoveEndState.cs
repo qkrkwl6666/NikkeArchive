@@ -1,6 +1,8 @@
 public class MoveEndState : SubState, IObserver
 {
     private StateSubject stateSubject;
+    
+    private MainStateMachine mainStateMachine;
 
     private AttackState attackState;
     private MoveState moveState;
@@ -36,10 +38,11 @@ public class MoveEndState : SubState, IObserver
         attackState = stateSubject.AttackState;
         moveState = stateSubject.MoveState;
         movingState = stateSubject.MovingState;
+        mainStateMachine = stateSubject.MainStateMachine;
     }
 
-    public void AnimationEventMoveEnd()
+    public void AnimationMoveEndEvent()
     {
-        moveState.ChangeMainState(attackState);
+        mainStateMachine.ChangeState(attackState);
     }
 }

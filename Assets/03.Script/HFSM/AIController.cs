@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public abstract class AIController : MonoBehaviour
 {
-    protected Animator animator;
+    public Animator Animator { get; private set; }
 
     public Animation_State CurrentAnimationState { get; set; } = Animation_State.NORMAL;
 
@@ -30,7 +30,7 @@ public abstract class AIController : MonoBehaviour
 
     protected virtual void Start()
     {
-        animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
         battleManager = GameObject.FindWithTag("BattleManager").GetComponent<BattleManager>();
 
@@ -43,9 +43,10 @@ public abstract class AIController : MonoBehaviour
 
     public void AnimationPlay(string name)
     {
+
         if (AnimationStringException(name))
         {
-            animator.SetTrigger(name);
+            Animator.SetTrigger(name);
             return;
         }
 
@@ -55,7 +56,7 @@ public abstract class AIController : MonoBehaviour
             animationCache.Add((name, CurrentAnimationState), fullName);
         }
 
-        animator.SetTrigger(fullName);
+        Animator.SetTrigger(fullName);
     }
 
     private bool AnimationStringException(string name)

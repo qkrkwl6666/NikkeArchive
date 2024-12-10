@@ -20,6 +20,7 @@ public class StateSubject : ISubject
     public MovingState MovingState { get; private set; } // Sub
     public MoveCoverState MoveCoverState { get; private set; } // Sub
     public MoveEndState MoveEndState { get; private set; } // Sub
+    public MoveJumpState MoveJumpState { get; private set; } // Sub
 
     // IdleState
     public IdleState IdleState { get; private set; } // Main
@@ -37,6 +38,7 @@ public class StateSubject : ISubject
         this.MovingState = moveState.MovingState;
         this.MoveEndState = moveState.MoveEndState;
         this.MoveCoverState = moveState.MoveCoverState;
+        this.MoveJumpState = moveState.MoveJumpState;
 
         this.IdleState = idleState;
 

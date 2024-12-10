@@ -6,8 +6,11 @@ public class AttackReloadState : SubState, IObserver
 
     private MoveState moveState; // Main
     private IdleState idleState; // Main
+
     private AttackStartState attackStartState; // Sub
     private AttackDelayState attackDelayState; // Sub
+    private MovingState movingState;
+    private MoveJumpState moveJumpState;
 
     public AttackReloadState(SubStateMachine subStateMachine, AIController aIController,
         StateSubject stateSubject) : base(subStateMachine, aIController)
@@ -37,7 +40,10 @@ public class AttackReloadState : SubState, IObserver
 
         if (!controller.EnemyDetection())
         {
-            mainStateMachine.ChangeState(moveState);
+            if (controller.CoverObject == null)
+                mainStateMachine.ChangeState(moveState, movingState);
+            else
+                mainStateMachine.ChangeState(moveState, moveJumpState);
             return;
         }
 
@@ -50,6 +56,8 @@ public class AttackReloadState : SubState, IObserver
         attackDelayState = stateSubject.AttackDelayState;
         mainStateMachine = stateSubject.MainStateMachine;
         moveState = stateSubject.MoveState;
+        movingState = stateSubject.MovingState;
+        moveJumpState = stateSubject.MoveJumpState;
         idleState = stateSubject.IdleState;
     }
 }

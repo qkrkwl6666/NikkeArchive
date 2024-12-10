@@ -7,6 +7,7 @@ public class IdleState : MainState, IObserver
 
     private AttackState attackState;
     private MoveState moveState;
+    private MovingState movingState;
 
     private float time;
     private float idleDuration = 2f;
@@ -44,7 +45,7 @@ public class IdleState : MainState, IObserver
         if (time >= idleDuration)
         {
             // MoveState ¿Ãµø
-            mainStateMachine.ChangeState(moveState);
+            mainStateMachine.ChangeState(moveState, movingState);
         }
     }
 
@@ -53,5 +54,6 @@ public class IdleState : MainState, IObserver
         moveState = stateSubject.MoveState;
         mainStateMachine = stateSubject.MainStateMachine;
         attackState = stateSubject.AttackState;
+        movingState = stateSubject.MovingState;
     }
 }

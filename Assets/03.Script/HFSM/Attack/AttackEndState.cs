@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public class AttackEndState : SubState, IObserver
 {
     private StateSubject stateSubject;
@@ -6,6 +8,9 @@ public class AttackEndState : SubState, IObserver
 
     private MoveState moveState;
     private IdleState idleState;
+
+    private MovingState movingState;
+    private MoveJumpState moveJumpState;
 
     public AttackEndState(SubStateMachine subStateMachine, AIController aIController,
         StateSubject stateSubject) : base(subStateMachine, aIController)
@@ -35,13 +40,24 @@ public class AttackEndState : SubState, IObserver
     public void AnimationAttackEndEvent()
     {
         // Move 상태 이동
-        mainStateMachine.ChangeState(moveState);
+        if(controller.CoverObject == null)
+        {
+            UnityEngine.Debug.Log("movingState");
+            mainStateMachine.ChangeState(moveState, movingState);
+        }
+        else
+        {
+            UnityEngine.Debug.Log("moveJumpState");
+            mainStateMachine.ChangeState(moveState, moveJumpState);
+        }
     }
 
     public void ObserverUpdate()
     {
         moveState = stateSubject.MoveState;
+        movingState = stateSubject.MovingState;
         idleState = stateSubject.IdleState;
         mainStateMachine = stateSubject.MainStateMachine;
+        moveJumpState = stateSubject.MoveJumpState;
     }
 }

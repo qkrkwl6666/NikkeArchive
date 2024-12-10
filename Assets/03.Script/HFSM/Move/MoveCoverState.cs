@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class MoveCoverState : SubState, IObserver
 {
     private StateSubject stateSubject;
@@ -15,6 +17,13 @@ public class MoveCoverState : SubState, IObserver
     public override void Enter()
     {
         controller.SubState = Sub_State.MOVE_COVER;
+
+        if(!controller.CoverDetection())
+        {
+            subStateMachine.ChangeState(movingState);
+            return;
+        }
+
         controller.SetAgentDestination(controller.CoverObject.CoverPoint.position);
 
         switch (controller.CoverObject.CoverType)
@@ -27,6 +36,9 @@ public class MoveCoverState : SubState, IObserver
                 break;
         }
 
+        AnimatorStateInfo stateInfo = controller.Animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName(AnimationStrings.MOVE_ING)) return;
+        controller.AnimationPlay(AnimationStrings.MOVE_ING);
 
     }
     public override void Execute()
