@@ -207,6 +207,19 @@ public abstract class AIController : MonoBehaviour
         CoverObject = null;
         CurrentAnimationState = Animation_State.NORMAL;
     }
+
+    // 데미지 관련 처리
+    public void TakeDamage(float damage)
+    {
+        NikkeStats.Hp -= damage;
+
+        if(NikkeStats.Hp < 0)
+        {
+            NikkeStats.Hp = 0;
+            // 죽음 처리 임시로 파괴
+            Destroy(gameObject);
+        }
+    }
 }
 
 public enum Animation_State

@@ -1,7 +1,7 @@
 public class NikkeStats
 {
-    public int Hp { get; private set; } // 체력
-    public int MaxHp { get; private set; } // 최대 체력
+    public float Hp { get; set; } // 체력
+    public float MaxHp { get; private set; } // 최대 체력
     public int Defence { get; private set; } // 방어력
     public float Attack { get; private set; } // 공격력
     public BustType BustType { get; set; } // 버스트 

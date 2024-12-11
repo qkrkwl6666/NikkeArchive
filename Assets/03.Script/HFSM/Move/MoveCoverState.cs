@@ -43,6 +43,7 @@ public class MoveCoverState : SubState, IObserver
     }
     public override void Execute()
     {
+        // CoverObject ∞° null ¿Ã∞Ì 
         if(controller.CoverObject == null)
         {
             subStateMachine.ChangeState(movingState);
