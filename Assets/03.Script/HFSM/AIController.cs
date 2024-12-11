@@ -9,10 +9,10 @@ public abstract class AIController : MonoBehaviour
     public Animation_State CurrentAnimationState { get; set; } = Animation_State.NORMAL;
 
     private Dictionary<(string, Animation_State), string> animationCache = new();
-    public Creature TargetEnemy { get; private set; }
+    public AIController TargetEnemy { get; private set; }
 
     public NikkeStats NikkeStats { get; private set; }
-    public List<Creature> enemies;
+    public List<AIController> enemies;
     public List<CoverObject> coverObjects;
 
     public NavMeshAgent NavMeshAgent { get; private set; }
@@ -26,6 +26,10 @@ public abstract class AIController : MonoBehaviour
 
     // BattleManager
     private BattleManager battleManager;
+
+    // TEST
+    public GameObject shotEffect;
+    public Transform muzzlePosition;
 
 
     protected virtual void Start()
@@ -128,7 +132,7 @@ public abstract class AIController : MonoBehaviour
 
         foreach (var cover in coverObjects)
         {
-            if (!cover.IsEmpty) continue;
+            if (cover == null || !cover.IsEmpty) continue;
 
             float distance = Vector3.Distance(cover.transform.position, transform.position);
             if (distance <= NikkeStats.CoverRange && distance < frevDistance 
@@ -179,6 +183,13 @@ public abstract class AIController : MonoBehaviour
         NikkeStats = nikkeStats;
     }
 
+    // 테스트용 코드 나중에 오브젝트 풀 사용
+    public void GunShot()
+    {
+        var go = Instantiate(shotEffect).GetComponent<Bullet>();
+        go.Init(muzzlePosition.position, TargetEnemy);
+    }
+
     public bool HasAmmo()
     {
         if (NikkeStats.CurrentAmmo > 0)
@@ -208,9 +219,11 @@ public abstract class AIController : MonoBehaviour
         CurrentAnimationState = Animation_State.NORMAL;
     }
 
-    // 데미지 관련 처리
+    // 데미지 관련 처리 테스트용
     public void TakeDamage(float damage)
     {
+        if (NikkeStats == null) return;
+
         NikkeStats.Hp -= damage;
 
         if(NikkeStats.Hp < 0)

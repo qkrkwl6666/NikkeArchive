@@ -31,7 +31,8 @@ public class CoverObject : MonoBehaviour
     {
         // controller.CoverObject = null
         // controller 애니메이션 Normal 로 변경
-        controller.CoverDestory();
+        if(controller != null)
+            controller.CoverDestory();
         Destroy(gameObject); // 임시로 파괴
     }    
 

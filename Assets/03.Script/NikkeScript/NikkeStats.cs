@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class NikkeStats
 {
     public float Hp { get; set; } // 체력
@@ -18,7 +20,8 @@ public class NikkeStats
     public int CurrentAmmo { get; set; } = 5; // 현재 탄약
     public float AttackRange { get; private set; } = 13f;// 공격 사거리
     public float CoverRange { get; private set; } = 10f;// 커버 탐지 사거리
-    public int AttackCount { get; private set; } // 공격 횟수
+    public int AttackCount { get; private set; } = 3;// 공격 횟수
+    public List<float> ShotAnimationTime { get; set; } = new List<float>();
 
     public void ReloadAmmo()
     {

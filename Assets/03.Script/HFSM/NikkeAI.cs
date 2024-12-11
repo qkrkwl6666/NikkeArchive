@@ -8,9 +8,6 @@ public class NikkeAI : AIController
 
     public MainStateMachine MainStateMachine { get; private set; } // MainState
 
-    // 테스트 
-    public Creature enemyTest1;
-
     // StateSubject
     private StateSubject stateSubject;
 
@@ -19,8 +16,11 @@ public class NikkeAI : AIController
         // 임시 니케 스텟
         NikkeStats stats = new NikkeStats();
 
-        SetNikkeData(stats);
+        stats.ShotAnimationTime.Add(0.03f);
+        stats.ShotAnimationTime.Add(0.06f);
+        stats.ShotAnimationTime.Add(0.11f);
 
+        SetNikkeData(stats);
     }
 
     protected override void Start()
@@ -91,6 +91,11 @@ public class NikkeAI : AIController
     public void AnimationMoveJumpEvent()
     {
         MoveState.AnimationMoveJumpEvent();
+    }
+
+    public void AnimationAttackIngGunShot()
+    {
+        GunShot();
     }
 
     #endregion
