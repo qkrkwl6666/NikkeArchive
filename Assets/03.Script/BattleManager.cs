@@ -9,5 +9,9 @@ public class BattleManager : MonoBehaviour
     [field: SerializeField]
     public List<CoverObject> CoverObjects { get; private set; } = new();
 
+    public void EnemyListRefresh()
+    {
+
+    }
 
 }

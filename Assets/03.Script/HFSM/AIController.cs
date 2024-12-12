@@ -94,6 +94,8 @@ public abstract class AIController : MonoBehaviour
 
         foreach (var enemy in enemies)
         {
+            if(enemy == null) continue; 
+
             float distance = Vector3.Distance(enemy.transform.position, transform.position);
 
             if (distance <= NikkeStats.AttackRange + detectionMargin && distance < frevDistance)
@@ -114,6 +116,8 @@ public abstract class AIController : MonoBehaviour
 
         foreach (var enemy in enemies)
         {
+            if (enemy == null) continue;
+
             float distance = Vector3.Distance(enemy.transform.position, pos.position);
 
             if (distance <= NikkeStats.AttackRange + DetectMargin && distance < frevDistance)
@@ -186,8 +190,9 @@ public abstract class AIController : MonoBehaviour
     // 테스트용 코드 나중에 오브젝트 풀 사용
     public void GunShot()
     {
+        if (TargetEnemy == null) return;
         var go = Instantiate(shotEffect).GetComponent<Bullet>();
-        go.Init(muzzlePosition.position, TargetEnemy);
+        go.Init(muzzlePosition.position, TargetEnemy, NikkeStats.Attack);
     }
 
     public bool HasAmmo()

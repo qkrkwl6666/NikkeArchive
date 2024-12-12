@@ -37,14 +37,27 @@ public class AttackReloadState : SubState, IObserver
 
     public void AnimationEventAttackReloadEnd()
     {
-
         if (!controller.EnemyDetection())
         {
             if (controller.CoverObject == null)
+            {
                 mainStateMachine.ChangeState(moveState, movingState);
+                return;
+            }
             else
-                mainStateMachine.ChangeState(moveState, moveJumpState);
-            return;
+            {
+                switch (controller.CurrentAnimationState)
+                {
+                    case Animation_State.NORMAL:
+                    case Animation_State.STAND:
+                        mainStateMachine.ChangeState(moveState, movingState);
+                        break;
+                    case Animation_State.KNEEL:
+                        mainStateMachine.ChangeState(moveState, moveJumpState);
+                        break;
+                }
+                return;
+            }
         }
 
         subStateMachine.ChangeState(attackStartState);

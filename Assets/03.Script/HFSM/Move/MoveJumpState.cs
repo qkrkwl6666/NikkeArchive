@@ -12,7 +12,7 @@ public class MoveJumpState : SubState, IObserver
     private MovingState movingState;
     private AttackState attackState;
 
-    private float jumpSpeed = 1.5f; 
+    private float jumpSpeed = 2f; 
     
     public MoveJumpState(SubStateMachine subStateMachine, AIController aIController,
         StateSubject stateSubject) : base(subStateMachine, aIController)
@@ -24,16 +24,18 @@ public class MoveJumpState : SubState, IObserver
 
     public override void Enter()
     {
+        controller.NavMeshAgent.enabled = false;
         controller.AnimationPlay(AnimationStrings.MOVE_JUMP);
+
     }
     public override void Exit()
     {
-
+        controller.NavMeshAgent.enabled = true;
     }
     public override void Execute()
     {
         // 점프 임시 움직이기
-        controller.transform.Translate(Vector3.right * jumpSpeed * Time.deltaTime);
+        controller.transform.Translate(jumpSpeed * Time.deltaTime * Vector3.forward);
     }
 
     public void AnimationMoveJumpEvent()

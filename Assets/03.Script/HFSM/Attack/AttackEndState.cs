@@ -42,13 +42,22 @@ public class AttackEndState : SubState, IObserver
         // Move 상태 이동
         if(controller.CoverObject == null)
         {
-            UnityEngine.Debug.Log("movingState");
             mainStateMachine.ChangeState(moveState, movingState);
+            return;
         }
         else
         {
-            UnityEngine.Debug.Log("moveJumpState");
-            mainStateMachine.ChangeState(moveState, moveJumpState);
+            switch (controller.CurrentAnimationState)
+            {
+                case Animation_State.NORMAL:
+                case Animation_State.STAND:
+                    mainStateMachine.ChangeState(moveState, movingState);
+                    break;
+                case Animation_State.KNEEL:
+                    mainStateMachine.ChangeState(moveState, moveJumpState);
+                    break;
+            }
+            return;
         }
     }
 

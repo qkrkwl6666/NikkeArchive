@@ -13,10 +13,11 @@ public class Bullet : MonoBehaviour
     private float rotateSpeed = 20f;
     Vector3 dir = Vector3.zero;
 
-    public void Init(Vector3 initPos, AIController controller)
+    public void Init(Vector3 initPos, AIController controller, float damage)
     {
         transform.position = initPos;
         this.controller = controller;
+        this.damage = damage;
 
         TargetPosReferesh();
     }

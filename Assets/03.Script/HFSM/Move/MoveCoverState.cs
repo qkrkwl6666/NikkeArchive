@@ -18,7 +18,8 @@ public class MoveCoverState : SubState, IObserver
     {
         controller.SubState = Sub_State.MOVE_COVER;
 
-        if(!controller.CoverDetection())
+        //
+        if(controller.CoverObject == null)
         {
             subStateMachine.ChangeState(movingState);
             return;
@@ -26,7 +27,7 @@ public class MoveCoverState : SubState, IObserver
 
         controller.SetAgentDestination(controller.CoverObject.CoverPoint.position);
 
-        switch (controller.CoverObject.CoverType)
+        switch (controller.CoverObject.coverType)
         {
             case CoverType.Stand:
                 controller.CurrentAnimationState = Animation_State.STAND;
@@ -46,6 +47,7 @@ public class MoveCoverState : SubState, IObserver
         // CoverObject ∞° null ¿Ã∞Ì 
         if(controller.CoverObject == null)
         {
+            controller.CurrentAnimationState = Animation_State.NORMAL; 
             subStateMachine.ChangeState(movingState);
         }
 

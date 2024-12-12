@@ -7,7 +7,7 @@ public class CoverObject : MonoBehaviour
 
     public bool IsEmpty { get; private set; } = true;
 
-    public CoverType CoverType { get; private set; } = CoverType.Kneel;
+    public CoverType coverType = CoverType.Stand;
 
     private AIController controller;
 

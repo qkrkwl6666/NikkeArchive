@@ -37,6 +37,11 @@ public class AttackIngState : SubState, IObserver
     {
         if (controller == null) return;
 
+        //if(controller.TargetEnemy == null)
+        //{
+        //    subStateMachine.ChangeState(attackDelayState);
+        //}
+
 
         // 애니메이션 이벤트 방식으로 변경
         //AnimatorStateInfo animatorStateInfo;
@@ -65,6 +70,7 @@ public class AttackIngState : SubState, IObserver
 
     public void AnimationEventAttackIngEnd()
     {
+        Debug.Log("AnimationEventAttackIngEnd");
         subStateMachine.ChangeState(attackDelayState);
     }
 

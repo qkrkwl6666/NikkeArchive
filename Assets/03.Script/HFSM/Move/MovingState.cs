@@ -65,7 +65,7 @@ public class MovingState : SubState, IObserver
         if(controller.CoverDetection())
         {
             subStateMachine.ChangeState(moveCoverState);
-            return;
+            return; 
         }
 
         subStateMachine.ChangeState(moveEndState);   
