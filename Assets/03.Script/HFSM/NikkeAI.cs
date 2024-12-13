@@ -63,6 +63,11 @@ public class NikkeAI : AIController
 
     }
 
+    public void FixedUpdate()
+    {
+        MainStateMachine.FixedUpdate();
+    }
+
     #region 애니메이션 이벤트
     public void AnimationAttackStartEvent()
     {

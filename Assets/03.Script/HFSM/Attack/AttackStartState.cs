@@ -22,7 +22,7 @@ public class AttackStartState : SubState, IObserver
 
     }
 
-    public override void Execute()
+    public override void Update()
     {
         if (controller == null) return;
 

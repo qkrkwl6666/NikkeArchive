@@ -42,21 +42,29 @@ public class MoveCoverState : SubState, IObserver
         controller.AnimationPlay(AnimationStrings.MOVE_ING);
 
     }
-    public override void Execute()
+    public override void Update()
     {
         // CoverObject 가 null 이고 
         if(controller.CoverObject == null)
         {
             controller.CurrentAnimationState = Animation_State.NORMAL; 
             subStateMachine.ChangeState(movingState);
+            return;
         }
 
         // Todo 테스트 못함
-        if (controller.TargetEnemy == null && controller.EnemyDetection()) 
+        if (controller.TargetEnemy == null) 
         {
-            if(!controller.CoverEnemyDetection(controller.TargetEnemy.transform))
+            bool isEnemy = controller.EnemyDetection();
+            if (isEnemy && !controller.CoverEnemyDetection(controller.TargetEnemy.transform))
             {
                 subStateMachine.ChangeState(movingState);
+                return;
+            }
+            else if (!isEnemy)
+            {
+                subStateMachine.ChangeState(movingState);
+                return;
             }
         }
 

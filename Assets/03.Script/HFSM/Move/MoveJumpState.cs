@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class MoveJumpState : SubState, IObserver
@@ -32,7 +29,7 @@ public class MoveJumpState : SubState, IObserver
     {
         controller.NavMeshAgent.enabled = true;
     }
-    public override void Execute()
+    public override void Update()
     {
         // 점프 임시 움직이기
         controller.transform.Translate(jumpSpeed * Time.deltaTime * Vector3.forward);

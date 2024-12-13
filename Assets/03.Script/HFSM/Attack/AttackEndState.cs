@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 public class AttackEndState : SubState, IObserver
 {
     private StateSubject stateSubject;
@@ -31,7 +29,7 @@ public class AttackEndState : SubState, IObserver
 
     }
 
-    public override void Execute()
+    public override void Update()
     {
         if (controller == null) return;
 

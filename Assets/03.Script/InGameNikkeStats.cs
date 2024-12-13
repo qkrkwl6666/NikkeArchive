@@ -1,6 +1,3 @@
-
-using JetBrains.Annotations;
-
 public class InGameNikkeStats
 {
     public float Hp { get; set; } // Ã¼·Â

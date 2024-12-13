@@ -36,7 +36,7 @@ public class IdleState : MainState, IObserver
 
     }
 
-    public override void Execute()
+    public override void Update()
     {
         time += Time.deltaTime;
 

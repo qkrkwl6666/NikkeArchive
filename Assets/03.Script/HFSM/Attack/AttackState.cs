@@ -59,7 +59,7 @@ public class AttackState : MainState, IObserver
         }
     }
 
-    public override void Execute()
+    public override void Update()
     {
         if (controller == null) return;
 

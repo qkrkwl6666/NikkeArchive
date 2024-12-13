@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class MoveState : MainState, IObserver
 {
     private StateSubject stateSubject;
@@ -37,7 +35,7 @@ public class MoveState : MainState, IObserver
         SubStateMachine.CurrentStateExit();
     }
 
-    public override void Execute()
+    public override void Update()
     {
         SubStateMachine.Update();
 

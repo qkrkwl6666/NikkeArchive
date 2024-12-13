@@ -30,7 +30,7 @@ public class AttackReloadState : SubState, IObserver
         controller.NikkeStats.ReloadAmmo();
     }
 
-    public override void Execute()
+    public override void Update()
     {
 
     }

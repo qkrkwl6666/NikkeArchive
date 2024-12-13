@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackIngState : SubState, IObserver
@@ -33,7 +32,7 @@ public class AttackIngState : SubState, IObserver
 
     }
 
-    public override void Execute()
+    public override void Update()
     {
         if (controller == null) return;
 

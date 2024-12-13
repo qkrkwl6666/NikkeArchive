@@ -29,6 +29,13 @@ public class MainStateMachine
     {
         if (CurrentState == null) return;
 
-        CurrentState?.Execute();
+        CurrentState?.Update();
+    }
+
+    public void FixedUpdate()
+    {
+        if (CurrentState == null) return;
+
+        CurrentState?.FixedUpdate();
     }
 }
