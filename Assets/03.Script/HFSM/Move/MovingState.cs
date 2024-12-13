@@ -24,6 +24,7 @@ public class MovingState : SubState, IObserver
 
     public override void Enter()
     {
+        controller.SetRigDefault();
         controller.SubState = Sub_State.MOVE_ING;
         time = 0f;
         controller.CurrentAnimationState = Animation_State.NORMAL;

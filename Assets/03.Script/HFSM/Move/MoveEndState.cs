@@ -19,6 +19,7 @@ public class MoveEndState : SubState, IObserver
 
     public override void Enter()
     {
+        controller.SetRigDefault();
         controller.AnimationPlay(AnimationStrings.MOVE_END);
         controller.SubState = Sub_State.MOVE_END;
     }

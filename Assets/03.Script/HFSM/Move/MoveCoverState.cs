@@ -16,6 +16,7 @@ public class MoveCoverState : SubState, IObserver
 
     public override void Enter()
     {
+        controller.SetRigDefault();
         controller.SubState = Sub_State.MOVE_COVER;
 
         //

@@ -20,6 +20,7 @@ public class AttackEndState : SubState, IObserver
 
     public override void Enter()
     {
+        controller.SetRigDefault();
         controller.AnimationPlay(AnimationStrings.ATTACK_END);
         controller.SubState = Sub_State.ATTACK_END;
     }

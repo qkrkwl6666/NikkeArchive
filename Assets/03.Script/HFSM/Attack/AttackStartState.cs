@@ -13,6 +13,7 @@ public class AttackStartState : SubState, IObserver
 
     public override void Enter()
     {
+        controller.SetRigDefault();
         controller.AnimationPlay(AnimationStrings.ATTACK_START);
         controller.SubState = Sub_State.ATTACK_START;
     }

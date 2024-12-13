@@ -21,9 +21,9 @@ public class MoveJumpState : SubState, IObserver
 
     public override void Enter()
     {
+        controller.SetRigWeight(0f, 1f);
         controller.NavMeshAgent.enabled = false;
         controller.AnimationPlay(AnimationStrings.MOVE_JUMP);
-
     }
     public override void Exit()
     {

@@ -21,6 +21,7 @@ public class AttackReloadState : SubState, IObserver
 
     public override void Enter()
     {
+        controller.SetRigWeight(0f, 1f);
         controller.AnimationPlay(AnimationStrings.ATTACK_RELOAD);
         controller.SubState = Sub_State.ATTACK_RELOAD;
     }

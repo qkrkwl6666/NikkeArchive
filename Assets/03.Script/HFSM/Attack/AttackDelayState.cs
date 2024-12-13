@@ -26,6 +26,7 @@ public class AttackDelayState : SubState, IObserver
 
     public override void Enter()
     {
+        controller.SetRigDefault();
         controller.AnimationPlay(AnimationStrings.ATTACK_DELAY);
         controller.SubState = Sub_State.ATTACK_DELAY;
         time = 0f;

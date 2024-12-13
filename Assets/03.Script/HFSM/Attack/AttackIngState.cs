@@ -19,6 +19,7 @@ public class AttackIngState : SubState, IObserver
 
     public override void Enter()
     {
+        controller.SetRigDefault();
         controller.NikkeStats.CurrentAmmo--;
         controller.AnimationPlay(AnimationStrings.ATTACK_ING);
         

@@ -1,6 +1,8 @@
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations.Rigging;
 
 public abstract class AIController : MonoBehaviour
 {
@@ -26,11 +28,12 @@ public abstract class AIController : MonoBehaviour
 
     // BattleManager
     private BattleManager battleManager;
+    private Rig rig;
+    private float rigTime = 1f;
 
     // TEST
     public GameObject shotEffect;
     public Transform muzzlePosition;
-
 
     protected virtual void Start()
     {
@@ -43,6 +46,8 @@ public abstract class AIController : MonoBehaviour
 
         // NavMeshAgent 초기화
         NavMeshAgent.speed = NikkeStats.MoveSpeed;
+
+        rig = GetComponentInChildren<Rig>();
     }
 
     public void AnimationPlay(string name)
@@ -237,6 +242,29 @@ public abstract class AIController : MonoBehaviour
             // 죽음 처리 임시로 파괴
             Destroy(gameObject);
         }
+    }
+
+    public async UniTask UniSetRigWeight(float weight, float duration)
+    {
+        float elapsedTime = 0f;
+        float initWeight = rig.weight;
+        while (elapsedTime < duration) 
+        { 
+            elapsedTime += Time.deltaTime;
+            rig.weight = Mathf.Lerp(initWeight, weight, elapsedTime / duration);
+            await UniTask.Yield();
+        }
+        rig.weight = weight;
+    }
+
+    public async void SetRigWeight(float weight, float duration)
+    {
+        await UniSetRigWeight(weight, duration);
+    }
+
+    public async void SetRigDefault()
+    {
+        await UniSetRigWeight(1f, rigTime);
     }
 }
 
