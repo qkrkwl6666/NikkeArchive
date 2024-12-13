@@ -51,6 +51,15 @@ public class MoveCoverState : SubState, IObserver
             subStateMachine.ChangeState(movingState);
         }
 
+        // Todo 테스트 못함
+        if (controller.TargetEnemy == null && controller.EnemyDetection()) 
+        {
+            if(!controller.CoverEnemyDetection(controller.TargetEnemy.transform))
+            {
+                subStateMachine.ChangeState(movingState);
+            }
+        }
+
         IsDestinationReached();
     }
 
