@@ -197,7 +197,13 @@ public abstract class AIController : MonoBehaviour
     {
         if (TargetEnemy == null) return;
         var go = Instantiate(shotEffect).GetComponent<Bullet>();
-        go.Init(muzzlePosition.position, TargetEnemy, NikkeStats.Attack);
+
+        // 총구 방향에서 
+        Vector3 dir = TargetEnemy.transform.position - muzzlePosition.position;
+        dir.Normalize();
+        dir.y = 0;
+
+        go.Init(muzzlePosition.position, dir, NikkeStats.Attack);
     }
 
     public bool HasAmmo()
