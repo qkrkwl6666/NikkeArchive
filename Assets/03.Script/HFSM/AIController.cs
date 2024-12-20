@@ -25,6 +25,8 @@ public abstract class AIController : MonoBehaviour
     public Sub_State SubState { get; set; }
 
     public CoverObject CoverObject { get; set; }
+    // HP 체력 스크립트
+    protected HpBar hpBar;
 
     // BattleManager
     private BattleManager battleManager;
@@ -48,6 +50,8 @@ public abstract class AIController : MonoBehaviour
         NavMeshAgent.speed = NikkeStats.MoveSpeed;
 
         rig = GetComponentInChildren<Rig>();
+
+        //hpBar = GetComponentInChildren<HpBar>();
     }
 
     public void AnimationPlay(string name)
@@ -241,8 +245,9 @@ public abstract class AIController : MonoBehaviour
         if (NikkeStats == null) return;
 
         NikkeStats.Hp -= damage;
+        hpBar.HpUpdate(NikkeStats.Hp, NikkeStats.MaxHp);
 
-        if(NikkeStats.Hp < 0)
+        if (NikkeStats.Hp < 0)
         {
             NikkeStats.Hp = 0;
             // 죽음 처리 임시로 파괴

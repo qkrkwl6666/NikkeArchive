@@ -67,11 +67,16 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        //Debug.Log(other.gameObject.name);
         if(other.gameObject.CompareTag("Enemy"))
         {
             other.GetComponent<AIController>().TakeDamage(damage);
             Destroy(gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 }
